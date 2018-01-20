@@ -5,7 +5,7 @@ import {pinkA400} from 'material-ui/styles/colors';
 
 import './App.css';
 
-import LogIn from './containers/LogIn';
+import Router from './router';
 
 const muiTheme = getMuiTheme({
   textField: {
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">
-          <LogIn />
+          <Router />
         </div>
       </MuiThemeProvider>
     );
