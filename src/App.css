@@ -29,6 +29,10 @@ body {
   display: flex;
 }
 
-.firstInput, .secondInput {
+.firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton {
   padding: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
 }
