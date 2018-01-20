@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 
 import Submit from './containers/Submit';
+import LogIn from './containers/LogIn';
 
 const Routes = () => (
   <Router>
@@ -13,12 +14,6 @@ const Routes = () => (
       <Route path="/submit" component={Submit}/>
     </div>
   </Router>
-)
-
-const LogIn = () => (
-  <div>
-    <h2>LogIn</h2>
-  </div>
 )
 
 export default Routes;
