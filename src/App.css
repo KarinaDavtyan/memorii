@@ -3,11 +3,6 @@ body {
   font-family: sans-serif;
 }
 
-.LogIn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .App {
   height: 100vh;
@@ -19,10 +14,14 @@ body {
   background-color: #E6ECF0;
 }
 
-.LogIn {
+.Submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Submit {
   display: flex;
   z-index: 1;
-  position: absolute;
   flex-direction: column;
   justify-content: flex-start;
 }
