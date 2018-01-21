@@ -5,21 +5,58 @@ import {pinkA400} from 'material-ui/styles/colors';
 
 class Register extends React.Component {
 
+  createUser = (data) => {
+    fetch('http://Karina-MacBookPro.local:3000/new_user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
+  state = {
+    username: '',
+    password: ''
+  }
+
+  handleChanges = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = () => {
+    let { username, password } = this.state;
+    this.createUser({
+      username,
+      password
+    })
+    this.setState({
+      username: '',
+      password: ''
+    })
+  }
   render () {
     return (
-      <div className="Register">
+      <div className='Register'>
         <TextField
-          floatingLabelText="Name & Surname"
+          floatingLabelText='Username'
+          onChange={this.handleChanges}
+          name='username'
+          value={this.state.username}
         />
         <TextField
-          floatingLabelText="Username"
-        />
-        <TextField
-          floatingLabelText="Password"
+          floatingLabelText='Password'
+          onChange={this.handleChanges}
+          name='password'
+          value={this.state.password}
+          type='password'
         />
         <RaisedButton
-          label="Register"
+          label='Register'
           labelColor={pinkA400}
+          onClick={this.handleSubmit}
         />
       </div>
     )
