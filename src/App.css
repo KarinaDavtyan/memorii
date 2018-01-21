@@ -36,3 +36,8 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.LogInForm, .Register {
+  display: flex;
+  flex-direction: column;
+}

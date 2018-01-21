@@ -33,9 +33,11 @@ class Register extends React.Component {
               </Link>
             </div>
             <div className="noButton">
+              <Link to="/login">
                 <RaisedButton
                   label="No"
                 />
+              </Link>
             </div>
           </div>
         </div>

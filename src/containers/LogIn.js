@@ -1,38 +1,27 @@
 import React from 'react';
 import UserPath from './UserPath';
-import LogInForm from './LogInForm';
 
 class LogIn extends React.Component {
 
   state = {
-    loggedIn: false,
-    test:true
-  }
+    loggedIn: false  }
 
   render () {
-    let { loggedIn, test } = this.state;
-    if (test) {
+    let { loggedIn } = this.state;
+    if (loggedIn) {
       return (
         <div>
-          <LogInForm />
+          <h1>
+            loggedIn
+          </h1>
         </div>
       )
     } else {
-      if (loggedIn) {
-        return (
-          <div>
-            <h1>
-              loggedIn
-            </h1>
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <UserPath />
-          </div>
-        )
-      }
+      return (
+        <div>
+          <UserPath />
+        </div>
+      )
     }
   }
 }
