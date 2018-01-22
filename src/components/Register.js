@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pinkA400} from 'material-ui/styles/colors';
+import { pinkA400 } from 'material-ui/styles/colors';
+import { Link } from 'react-router-dom';
 
 class Register extends React.Component {
 
@@ -53,11 +54,13 @@ class Register extends React.Component {
           value={this.state.password}
           type='password'
         />
-        <RaisedButton
-          label='Register'
-          labelColor={pinkA400}
-          onClick={this.handleSubmit}
-        />
+        <Link to='/login'>
+          <RaisedButton
+            label='Register'
+            labelColor={pinkA400}
+            onClick={this.handleSubmit}
+          />
+        </Link>
       </div>
     )
   }

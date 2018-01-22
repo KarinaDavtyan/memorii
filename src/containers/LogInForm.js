@@ -1,8 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pinkA400} from 'material-ui/styles/colors';
-
+import { pinkA400 } from 'material-ui/styles/colors';
+import { connect } from 'react-redux';
+import { Link }  from 'react-router-dom';
 class LogInForm extends React.Component {
 
   state = {
@@ -21,7 +22,7 @@ class LogInForm extends React.Component {
       .then(user => user.json())
       .then(user => {
         console.log(user);
-        return user
+        this.props.addAuthorization(user);
       })
   }
 
@@ -49,14 +50,23 @@ class LogInForm extends React.Component {
           value={this.state.password}
           type='password'
         />
-        <RaisedButton
-          label="Log In"
-          labelColor={pinkA400}
-          onClick={this.handleSubmit}
-        />
+        <Link to={`/${this.state.username}`}>
+          <RaisedButton
+            label="Log In"
+            labelColor={pinkA400}
+            onClick={this.handleSubmit}
+          />
+        </Link>
       </div>
     )
   }
 }
 
-export default LogInForm;
+const mapDispatchToProps = (dispatch) => ({
+  addAuthorization: (data) =>  dispatch({
+    type: 'SET_AUTHORIZATION',
+    data
+  })
+})
+
+export default connect(null, mapDispatchToProps)(LogInForm);

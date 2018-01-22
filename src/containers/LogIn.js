@@ -1,19 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import UserPath from './UserPath';
+import Submit from './Submit';
 
 class LogIn extends React.Component {
 
-  state = {
-    loggedIn: false  }
+  // state = {
+  //   loggedIn: false
+  // }
 
   render () {
-    let { loggedIn } = this.state;
-    if (loggedIn) {
+    // let { loggedIn } = this.state;
+    if (this.props.auth) {
       return (
         <div>
-          <h1>
-            loggedIn
-          </h1>
+          <Submit />
         </div>
       )
     } else {
@@ -26,4 +27,9 @@ class LogIn extends React.Component {
   }
 }
 
-export default LogIn;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.token,
+  };
+}
+export default connect(mapStateToProps, null)(LogIn);

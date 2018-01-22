@@ -29,7 +29,7 @@ body {
   display: flex;
 }
 
-.firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton {
+.firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton, .leftButton, .rightButton {
   padding: 10px;
 }
 .buttons {

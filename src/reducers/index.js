@@ -6,9 +6,19 @@ const defaultAuthState = {
 const auth = (state = defaultAuthState, action) => {
   switch (action.type) {
   case 'SET_AUTHORIZATION':
-    return action.data
+    return {
+      token: action.data.token,
+      user: action.data.usernames
+    }
+    break;
+  case 'CLEAR_AUTHORIZATION':
+    return {
+      token: null,
+      user: null
+    }
     break;
   }
+
   return state;
 }
 

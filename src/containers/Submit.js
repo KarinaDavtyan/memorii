@@ -2,9 +2,12 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
+import { connect } from 'react-redux';
+import { Link }  from 'react-router-dom';
 
 class Submit extends React.Component {
   render () {
+    console.log(this.props);
     return (
       <div className="Submit">
         <div>
@@ -24,13 +27,45 @@ class Submit extends React.Component {
             />
           </div>
         </div>
-        <RaisedButton
-          label="Send"
-          labelColor={pinkA400}
-        />
+        <div className="buttons">
+          <div className="leftButton">
+            <RaisedButton
+              label="Send"
+              labelColor={pinkA400}
+            />
+          </div>
+          <div className="rightButton">
+            <Link to={'/login'}>
+              <RaisedButton
+                label="LogOut"
+                labelColor={pinkA400}
+                onClick={this.props.clearAuthorization}
+              />
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default Submit;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.token,
+  };
+}
+
+// const mapDispatchToProps = (dispatch) = ({
+//   clearAuthorization: () => dispatch({
+//     type: 'CLEAR_AUTHORIZATION'
+//   })
+// })
+
+const mapDispatchToProps = (dispatch) => ({
+  clearAuthorization: () => dispatch({
+    type: 'CLEAR_AUTHORIZATION'
+  })
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Submit);
