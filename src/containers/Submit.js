@@ -6,38 +6,82 @@ import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
 class Submit extends React.Component {
+
+  state = {
+    firstWord: '',
+    secondWord: ''
+  }
+
+  saveWords = (data) => {
+    fetch('http://Karina-MacBookPro.local:3000/pair', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      },
+      body: JSON.stringify(data)
+    })
+  }
+  handleSubmit = () => {
+    const { username } = this.props;
+    const { firstWord, secondWord } = this.state;
+
+    this.saveWords({
+      firstWord,
+      secondWord,
+      username
+    })
+
+    this.setState({
+      firstWord: '',
+      secondWord: ''
+    })
+  }
+
+  handleChanges = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render () {
-    console.log(this.props);
     return (
-      <div className="Submit">
+      <div className='Submit'>
         <div>
           <p>
             Insert pair of words you want to learn.
           </p>
         </div>
-        <div className="inputs">
-          <div className="firstInput">
+        <div className='inputs'>
+          <div className='firstInput'>
             <TextField
-              floatingLabelText="One"
+              floatingLabelText='One'
+              onChange={this.handleChanges}
+              name='firstWord'
+              value={this.state.firstWord}
             />
           </div>
-          <div className="secondInput">
+          <div className='secondInput'>
             <TextField
-              floatingLabelText="Two"
+              floatingLabelText='Two'
+              onChange={this.handleChanges}
+              name='secondWord'
+              value={this.state.secondWord}
             />
           </div>
         </div>
-        <div className="buttons">
-          <div className="leftButton">
+        <div className='buttons'>
+          <div className='leftButton'>
             <RaisedButton
-              label="Send"
+              label='Send'
               labelColor={pinkA400}
+              onClick={this.handleSubmit}
             />
           </div>
-          <div className="rightButton">
+          <div className='rightButton'>
             <Link to={'/login'}>
               <RaisedButton
-                label="LogOut"
+                label='LogOut'
                 labelColor={pinkA400}
                 onClick={this.props.clearAuthorization}
               />
@@ -52,6 +96,7 @@ class Submit extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.token,
+    username: state.user
   };
 }
 

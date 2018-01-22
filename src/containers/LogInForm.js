@@ -36,15 +36,15 @@ class LogInForm extends React.Component {
 
   render () {
     return (
-      <div className="LogInForm">
+      <div className='LogInForm'>
         <TextField
-          floatingLabelText="Username"
+          floatingLabelText='Username'
           onChange={this.handleChanges}
           name='username'
           value={this.state.username}
         />
         <TextField
-          floatingLabelText="Password"
+          floatingLabelText='Password'
           onChange={this.handleChanges}
           name='password'
           value={this.state.password}
@@ -52,7 +52,7 @@ class LogInForm extends React.Component {
         />
         <Link to={`/${this.state.username}`}>
           <RaisedButton
-            label="Log In"
+            label='Log In'
             labelColor={pinkA400}
             onClick={this.handleSubmit}
           />
