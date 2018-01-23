@@ -2,8 +2,10 @@
   "name": "plastic-tortilla",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://KarinaDavtyan.github.io/memorii-bot",
   "dependencies": {
     "babel-eslint": "^8.2.1",
+    "gh-pages": "^1.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
