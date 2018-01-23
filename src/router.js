@@ -42,7 +42,6 @@ class Routes extends React.Component {
         <div>
           <Switch>
             <Route exact path="/" component={LogIn}/>
-            {/* <PrivateRoute auth={this.props.auth} path="/submit" component={Submit}/> */}
             <Route path="/register" component={Register}/>
             <Route path="/welcome" component={UserPath}/>
             <Route path="/login" component={LogInForm}/>

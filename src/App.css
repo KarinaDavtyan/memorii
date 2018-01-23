@@ -27,6 +27,8 @@ body {
 
 .inputs {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton, .leftButton, .rightButton {

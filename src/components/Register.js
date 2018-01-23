@@ -55,11 +55,13 @@ class Register extends React.Component {
           type='password'
         />
         <Link to='/login'>
-          <RaisedButton
-            label='Register'
-            labelColor={pinkA400}
-            onClick={this.handleSubmit}
-          />
+          <div className="buttons">
+            <RaisedButton
+              label='Register'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
+          </div>
         </Link>
       </div>
     )

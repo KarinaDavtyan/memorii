@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
+
 class LogInForm extends React.Component {
 
   state = {
@@ -21,7 +22,6 @@ class LogInForm extends React.Component {
     })
       .then(user => user.json())
       .then(user => {
-        console.log(user);
         this.props.addAuthorization(user);
       })
   }
@@ -51,11 +51,13 @@ class LogInForm extends React.Component {
           type='password'
         />
         <Link to={`/${this.state.username}`}>
-          <RaisedButton
-            label='Log In'
-            labelColor={pinkA400}
-            onClick={this.handleSubmit}
-          />
+          <div className="buttons">
+            <RaisedButton
+              label='Log In'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
+          </div>
         </Link>
       </div>
     )
