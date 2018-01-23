@@ -15,11 +15,11 @@ import UserPath from './containers/UserPath';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
-  if (auth) {
+  // if (auth) {
     return (
       <Route
         {...rest} render={props => (
-          auth.token !== null ? (
+          auth !== null ? (
             <Component {...props} {...rest}/>
           ) : (
             <Redirect to={{
@@ -29,10 +29,12 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
           )
         )}/>
     )
-  } else {
-    return <Route
-      path="/login" component={LogInForm}/>
-  }
+  // } else {
+  //   return (
+  //     <Route
+  //       path="/login" component={LogInForm}/>
+  //   )
+  // }
 }
 
 class Routes extends React.Component {
