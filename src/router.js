@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import Submit from './containers/Submit';
 import Register from './components/Register';
-import UserPath from './containers/UserPath';
+import UserPath from './components/UserPath';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
