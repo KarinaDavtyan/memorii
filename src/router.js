@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 
 import Submit from './containers/Submit';
-import LogIn from './containers/LogIn';
 import Register from './components/Register';
 import UserPath from './containers/UserPath';
 import LogInForm from './containers/LogInForm';
@@ -30,15 +29,30 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   )
 }
 
+const EntryRoute = ({component: Component, auth, username, ...rest}) => {
+  return (
+    <Route
+      {...rest} render={props => (
+        auth === null ? (
+          <Component {...props} {...rest}/>
+        ) : (
+          <Redirect to={{
+            pathname: `${username}`,
+            state: { from: props.location }
+          }}/>
+        )
+      )}/>
+  )
+}
+
 class Routes extends React.Component {
   render () {
     return (
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={LogIn}/>
+            <EntryRoute exact path="/" username={this.props.username} component={UserPath}/>
             <Route path="/register" component={Register}/>
-            <Route path="/welcome" component={UserPath}/>
             <Route path="/login" component={LogInForm}/>
             <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
           </Switch>
@@ -48,9 +62,9 @@ class Routes extends React.Component {
   }
 }
 
-
 const mapStateToProps = (state) => ({
-  auth: state.token
+  auth: state.token,
+  username: state.user
 })
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, null)(Routes);
