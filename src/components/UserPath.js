@@ -3,9 +3,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { Link } from 'react-router-dom';
 
-// class UserPath extends React.Component {
-
-// render () {
 const UserPath = () => {
   return (
     <div className="UserPath">
@@ -32,7 +29,5 @@ const UserPath = () => {
     </div>
   )
 }
-// }
-// }
 
 export default UserPath;

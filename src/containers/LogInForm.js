@@ -34,6 +34,21 @@ class LogInForm extends React.Component {
 
   handleSubmit = () => this.fetchUserSession();
 
+  renderLogInButton = () => {
+    return (
+      <Link to={`/${this.state.username}`}>
+        {/* // <Link to='/register'> */}
+        <div className="buttons">
+          <RaisedButton
+            label='Log In'
+            labelColor={pinkA400}
+            onClick={this.handleSubmit}
+          />
+        </div>
+      </Link>
+    )
+  }
+
   render () {
     return (
       <div className='LogInForm'>
@@ -50,15 +65,7 @@ class LogInForm extends React.Component {
           value={this.state.password}
           type='password'
         />
-        <Link to={`/${this.state.username}`}>
-          <div className="buttons">
-            <RaisedButton
-              label='Log In'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
-          </div>
-        </Link>
+        {this.renderLogInButton()}
       </div>
     )
   }

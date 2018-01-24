@@ -14,6 +14,7 @@ import UserPath from './components/UserPath';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+  console.log('its here', auth);
   return (
     <Route
       {...rest} render={props => (
