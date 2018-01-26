@@ -12,7 +12,7 @@ class LogInForm extends React.Component {
     password: ''
   }
 
-  fetchUserSession = async () => {
+  fetchUserSession = () => {
     let { username, password } = this.state;
     const encoded = btoa(`${username}:${password}`);
     fetch('http://Karina-MacBookPro.local:3000/sign-in', {
@@ -71,4 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
   })
 })
 
-export default connect(null, mapDispatchToProps)(LogInForm);
+const mapStateToProps = (state) => ({
+  auth: state.auth.token
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

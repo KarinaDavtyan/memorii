@@ -17,7 +17,7 @@ const muiTheme = getMuiTheme({
 });
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="App">

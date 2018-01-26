@@ -5,6 +5,9 @@ import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
+import { showNotification } from '../actions';
+
+
 class Submit extends React.Component {
 
   state = {
@@ -21,7 +24,12 @@ class Submit extends React.Component {
       },
       body: JSON.stringify(data)
     })
+      .then(words => words.json())
+      .then(words => {
+        console.log(this.props);
+      })
   }
+
   handleSubmit = () => {
     const { username } = this.props;
     const { firstWord, secondWord } = this.state;
@@ -95,16 +103,11 @@ class Submit extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.token,
-    username: state.user
+    auth: state.auth.token,
+    username: state.auth.user,
+
   };
 }
-
-// const mapDispatchToProps = (dispatch) = ({
-//   clearAuthorization: () => dispatch({
-//     type: 'CLEAR_AUTHORIZATION'
-//   })
-// })
 
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({

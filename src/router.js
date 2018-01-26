@@ -3,18 +3,20 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
+  Switch,
+  withRouter
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
+import Snackbar from 'material-ui/Snackbar';
+
 import Submit from './containers/Submit';
-import LogIn from './containers/LogIn';
 import Register from './components/Register';
-import UserPath from './containers/UserPath';
+import UserPath from './components/UserPath';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+  console.log('its here', auth);
   return (
     <Route
       {...rest} render={props => (
@@ -30,15 +32,35 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   )
 }
 
+const EntryRoute = ({component: Component, auth, username, ...rest}) => {
+  return (
+    <Route
+      {...rest} render={props => (
+        auth === null ? (
+          <Component {...props} {...rest}/>
+        ) : (
+          <Redirect to={{
+            pathname: `${username}`,
+            state: { from: props.location }
+          }}/>
+        )
+      )}/>
+  )
+}
+
+
 class Routes extends React.Component {
   render () {
     return (
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={LogIn}/>
+            <EntryRoute exact path="/"
+              username={this.props.username}
+              auth={this.props.auth}
+              component={UserPath}
+            />
             <Route path="/register" component={Register}/>
-            <Route path="/welcome" component={UserPath}/>
             <Route path="/login" component={LogInForm}/>
             <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
           </Switch>
@@ -48,9 +70,9 @@ class Routes extends React.Component {
   }
 }
 
-
 const mapStateToProps = (state) => ({
-  auth: state.token
+  auth: state.auth.token,
+  username: state.auth.user
 })
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, null)(Routes);
