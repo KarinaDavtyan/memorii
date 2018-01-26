@@ -26,7 +26,6 @@ class Submit extends React.Component {
     })
       .then(words => words.json())
       .then(words => {
-        this.props.showNote('show')
         console.log(this.props);
       })
   }
@@ -113,8 +112,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
-  }),
-  showNote: (notificationMessage) => dispatch(showNotification(notificationMessage)),
+  })
 })
 
 

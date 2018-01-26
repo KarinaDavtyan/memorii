@@ -12,7 +12,7 @@ class LogInForm extends React.Component {
     password: ''
   }
 
-  fetchUserSession = async () => {
+  fetchUserSession = () => {
     let { username, password } = this.state;
     const encoded = btoa(`${username}:${password}`);
     fetch('http://Karina-MacBookPro.local:3000/sign-in', {
@@ -34,21 +34,6 @@ class LogInForm extends React.Component {
 
   handleSubmit = () => this.fetchUserSession();
 
-  renderLogInButton = () => {
-    return (
-      <Link to={`/${this.state.username}`}>
-        {/* // <Link to='/register'> */}
-        <div className="buttons">
-          <RaisedButton
-            label='Log In'
-            labelColor={pinkA400}
-            onClick={this.handleSubmit}
-          />
-        </div>
-      </Link>
-    )
-  }
-
   render () {
     return (
       <div className='LogInForm'>
@@ -65,7 +50,15 @@ class LogInForm extends React.Component {
           value={this.state.password}
           type='password'
         />
-        {this.renderLogInButton()}
+        <Link to={`/${this.state.username}`}>
+          <div className="buttons">
+            <RaisedButton
+              label='Log In'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
+          </div>
+        </Link>
       </div>
     )
   }
@@ -78,4 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
   })
 })
 
-export default connect(null, mapDispatchToProps)(LogInForm);
+const mapStateToProps = (state) => ({
+  auth: state.auth.token
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

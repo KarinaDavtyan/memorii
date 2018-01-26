@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
+  Switch,
+  withRouter
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -19,7 +20,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
     <Route
       {...rest} render={props => (
-        auth.token !== null ? (
+        auth !== null ? (
           <Component {...props} {...rest}/>
         ) : (
           <Redirect to={{
@@ -49,37 +50,20 @@ const EntryRoute = ({component: Component, auth, username, ...rest}) => {
 
 
 class Routes extends React.Component {
-  renderSnackBar = () => {
-    console.log('here route');
-    if (this.props.notifications) {
-      return (
-        <Snackbar
-          open={(new Date()).getTime() <= this.props.notifications.notificationTime}
-          message={this.props.notifications.notificationMessage}
-          autoHideDuration={5000}
-        />
-      )
-    } else {
-      return null;
-    }
-  }
   render () {
-    console.log(this.props, this.state);
     return (
       <Router>
         <div>
           <Switch>
-            <EntryRoute exact path="/" username={this.props.username} auth={this.props.auth} component={UserPath}/>
+            <EntryRoute exact path="/"
+              username={this.props.username}
+              auth={this.props.auth}
+              component={UserPath}
+            />
             <Route path="/register" component={Register}/>
             <Route path="/login" component={LogInForm}/>
             <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
           </Switch>
-          {/* <Snackbar
-            open={(new Date()).getTime() <= this.props.notifications.notificationTime}
-            message={this.props.notifications.notificationMessage}
-            autoHideDuration={5000}
-          /> */}
-          {this.renderSnackBar()}
         </div>
       </Router>
     )
@@ -88,8 +72,7 @@ class Routes extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user,
-  notifications: state.notifications,
+  username: state.auth.user
 })
 
 export default connect(mapStateToProps, null)(Routes);
