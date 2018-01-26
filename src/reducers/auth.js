@@ -8,7 +8,7 @@ const auth = (state = defaultAuthState, action) => {
   case 'SET_AUTHORIZATION':
     return {
       token: action.data.token,
-      user: action.data.username
+      user: action.data.user.username
     }
     break;
   case 'CLEAR_AUTHORIZATION':

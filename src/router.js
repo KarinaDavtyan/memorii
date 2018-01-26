@@ -35,7 +35,7 @@ const EntryRoute = ({component: Component, auth, username, ...rest}) => {
   return (
     <Route
       {...rest} render={props => (
-        auth.token === null ? (
+        auth === null ? (
           <Component {...props} {...rest}/>
         ) : (
           <Redirect to={{
@@ -69,7 +69,7 @@ class Routes extends React.Component {
       <Router>
         <div>
           <Switch>
-            <EntryRoute exact path="/" username={this.props.username} component={UserPath}/>
+            <EntryRoute exact path="/" username={this.props.username} auth={this.props.auth} component={UserPath}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={LogInForm}/>
             <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
@@ -87,8 +87,9 @@ class Routes extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  notifications: state.notifications
+  auth: state.auth.token,
+  username: state.auth.user,
+  notifications: state.notifications,
 })
 
 export default connect(mapStateToProps, null)(Routes);
