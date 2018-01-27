@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class Register extends React.Component {
 
   createUser = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/new_user', {
+    fetch('http://Karina-MacBookPro.local:3000/new-user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

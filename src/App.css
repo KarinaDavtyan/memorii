@@ -3,6 +3,9 @@ body {
   font-family: sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
 .App {
   height: 100vh;
   display: flex;
@@ -52,18 +55,18 @@ body {
   justify-content: space-around;
 }
 
-.UserPage-LogoutButton {
+.SelectionList {
+  width: 60vw;
 
 }
 
-.Selection {
-  width: 80vw;
-
+.SelectionContainer {
+  height: 50vh;
+  overflow: auto;
 }
 
-.SelectionItem {
-
-}
-
-.deleteIcon {
+.PlaceHolder {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
