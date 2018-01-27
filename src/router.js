@@ -13,6 +13,7 @@ import Snackbar from 'material-ui/Snackbar';
 import Submit from './containers/Submit';
 import Register from './components/Register';
 import UserPath from './components/UserPath';
+import UserPage from './containers/UserPage';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
@@ -53,18 +54,17 @@ class Routes extends React.Component {
   render () {
     return (
       <Router>
-        <div>
-          <Switch>
-            <EntryRoute exact path="/"
-              username={this.props.username}
-              auth={this.props.auth}
-              component={UserPath}
-            />
-            <Route path="/register" component={Register}/>
-            <Route path="/login" component={LogInForm}/>
-            <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
-          </Switch>
-        </div>
+        <Switch>
+          <EntryRoute exact path="/"
+            username={this.props.username}
+            auth={this.props.auth}
+            component={UserPath}
+          />
+          <Route path="/register" component={Register}/>
+          <Route path="/login" component={LogInForm}/>
+          {/* <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/> */}
+          <PrivateRoute path="/:username" auth={this.props.auth} component={UserPage}/>
+        </Switch>
       </Router>
     )
   }

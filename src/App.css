@@ -43,3 +43,27 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.UserPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.UserPage-LogoutButton {
+
+}
+
+.Selection {
+  width: 80vw;
+
+}
+
+.SelectionItem {
+
+}
+
+.deleteIcon {
+}
