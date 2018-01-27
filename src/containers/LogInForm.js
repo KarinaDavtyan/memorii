@@ -50,15 +50,25 @@ class LogInForm extends React.Component {
           value={this.state.password}
           type='password'
         />
-        <Link to={`/${this.state.username}`}>
-          <div className="buttons">
-            <RaisedButton
-              label='Log In'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
+        <div className="buttons">
+          <div className='leftButton'>
+            <Link to={`/${this.state.username}`}>
+              <RaisedButton
+                label='Log In'
+                labelColor={pinkA400}
+                onClick={this.handleSubmit}
+              />
+            </Link>
           </div>
-        </Link>
+          <div className='rightButton'>
+            <Link to='/'>
+              <RaisedButton
+                label='Home'
+                labelColor={pinkA400}
+              />
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }

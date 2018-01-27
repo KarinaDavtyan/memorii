@@ -5,9 +5,6 @@ import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
-import { showNotification } from '../actions';
-
-
 class Submit extends React.Component {
 
   state = {
@@ -24,10 +21,6 @@ class Submit extends React.Component {
       },
       body: JSON.stringify(data)
     })
-      .then(words => words.json())
-      .then(words => {
-        console.log(this.props);
-      })
   }
 
   handleSubmit = () => {

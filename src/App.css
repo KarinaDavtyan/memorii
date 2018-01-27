@@ -65,8 +65,23 @@ h1 {
   overflow: auto;
 }
 
+.addSelectionButton {
+  display: flex;
+  flex-direction: column;
+}
+
 .PlaceHolder {
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+.PaperContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.SelectionTitle {
+  padding-left: 10px;
 }

@@ -36,21 +36,17 @@ class UserPage extends React.Component {
   }
 
   saveSelections = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/selection', {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.props.auth}`
-      },
-      body: JSON.stringify(data)
+      }
     })
   }
 
   handleSubmit = () => {
     const { title } = this.state;
-    this.saveSelections({
-      title
-    })
     this.saveSelections(title);
     this.setState({
       title:''
@@ -68,6 +64,19 @@ class UserPage extends React.Component {
       return (
         <div className='Selection'>
           <Selection  selections={this.state.selections}/>
+          <div className='addSelectionButton'>
+            <TextField
+              floatingLabelText='New Selection'
+              onChange={this.handleChanges}
+              name='title'
+              value={this.state.title}
+            />
+            <RaisedButton
+              label='Add Selection'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
+          </div>
         </div>
       )
     } else {
