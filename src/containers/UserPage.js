@@ -27,6 +27,10 @@ class UserPage extends React.Component {
         'Content-type': 'application/json'
       }
     })
+      .catch((e) => {
+        console.log(e);
+        return e;
+      })
       .then(selections => selections.json())
       .then(selections => {
         this.setState({
@@ -63,7 +67,7 @@ class UserPage extends React.Component {
     if (this.state.selections.length > 0) {
       return (
         <div className='Selection'>
-          <Selection  selections={this.state.selections}/>
+          <Selection  selections={this.state.selections} />
           <div className='addSelectionButton'>
             <TextField
               floatingLabelText='New Selection'

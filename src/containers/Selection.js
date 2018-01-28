@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 class Selection extends React.Component {
 
   state = {
-    toDelete: ''
+    toDelete: '',
+    selection: ''
   }
 
   deleteSelection = (data) => {
@@ -38,7 +39,7 @@ class Selection extends React.Component {
           <div className='SelectionItem' key={selection._id}>
             <Paper style={style} zDepth={2} >
               <div className='PaperContainer'>
-                <div className='SelectionTitle'>
+                <div className='SelectionTitle' onClick={()=> this.setState({ selection : selection.title })}>
                   <p>
                     {selection.title}
                   </p>
@@ -46,7 +47,6 @@ class Selection extends React.Component {
                 <div className='DeleteButton'>
                   <FlatButton
                     label='DELETE'
-                    labelColor={pinkA400}
                     onClick={() => this.handleClick(selection.title)}
                   />
                 </div>
