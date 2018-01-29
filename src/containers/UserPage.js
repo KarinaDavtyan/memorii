@@ -1,10 +1,8 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
-import {pinkA400} from 'material-ui/styles/colors';
 import { Link }  from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import { pinkA400 } from 'material-ui/styles/colors';
 
 import Selection from './Selection';
 
@@ -16,8 +14,7 @@ class UserPage extends React.Component {
   }
 
   state = {
-    selections: '',
-    title: ''
+    selections: ''
   }
 
   fetchSelections = () => {
@@ -27,10 +24,6 @@ class UserPage extends React.Component {
         'Content-type': 'application/json'
       }
     })
-      .catch((e) => {
-        console.log(e);
-        return e;
-      })
       .then(selections => selections.json())
       .then(selections => {
         this.setState({
@@ -39,75 +32,12 @@ class UserPage extends React.Component {
       })
   }
 
-  saveSelections = (data) => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      }
-    })
-  }
-
-  handleSubmit = () => {
-    const { title } = this.state;
-    this.saveSelections(title);
-    this.setState({
-      title:''
-    })
-  }
-
-  handleChanges = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  renderSelection = () => {
-    if (this.state.selections.length > 0) {
-      return (
-        <div className='Selection'>
-          <Selection  selections={this.state.selections} />
-          <div className='addSelectionButton'>
-            <TextField
-              floatingLabelText='New Selection'
-              onChange={this.handleChanges}
-              name='title'
-              value={this.state.title}
-            />
-            <RaisedButton
-              label='Add Selection'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className='PlaceHolder'>
-          <p>
-            Oops, nothing here yet:(
-          </p>
-          <TextField
-            floatingLabelText='New Selection'
-            onChange={this.handleChanges}
-            name='title'
-            value={this.state.title}
-          />
-          <RaisedButton
-            label='Add Selection'
-            labelColor={pinkA400}
-            onClick={this.handleSubmit}
-          />
-        </div>
-      )
-    }
-  }
   render () {
     return (
       <div className="UserPage">
-        {this.renderSelection()}
+        <div className='Selection'>
+          <Selection  selections={this.state.selections} />
+        </div>
         <div className="UserPage-LogoutButton">
           <Link to={'/login'}>
             <RaisedButton

@@ -1,8 +1,9 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
-import {pinkA400} from 'material-ui/styles/colors';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
@@ -11,8 +12,24 @@ class Selection extends React.Component {
 
   state = {
     toDelete: '',
-    selection: ''
+    selection: '',
+    title: ''
   }
+
+  handleSubmit = () => {
+    const { title } = this.state;
+    this.saveSelections(title);
+    this.setState({
+      title:''
+    })
+  }
+
+  handleChanges = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
 
   deleteSelection = (data) => {
     fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
@@ -26,10 +43,16 @@ class Selection extends React.Component {
       .then(data => data)
   }
 
-
-  handleClick = (data) => {
-    this.deleteSelection(data);
+  saveSelections = (data) => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
   }
+
   renderSelection = () => {
     const style = {
       margin: 20
@@ -50,7 +73,7 @@ class Selection extends React.Component {
                 <div className='DeleteButton'>
                   <FlatButton
                     label='DELETE'
-                    onClick={() => this.handleClick(selection.title)}
+                    onClick={() => this.deleteSelection(selection.title)}
                   />
                 </div>
               </div>
@@ -63,16 +86,50 @@ class Selection extends React.Component {
   }
 
   render () {
-    return (
-      <div className="SelectionList">
-        <h1>
-          {this.props.username}'s Selections
-        </h1>
-        <div className="SelectionContainer">
-          {this.renderSelection()}
+    if (this.props.selections.length > 0) {
+      return (
+        <div className="SelectionList">
+          <h1>
+            {this.props.username}'s Selections
+          </h1>
+          <div className="SelectionContainer">
+            {this.renderSelection()}
+          </div>
+          <div className='addSelectionButton'>
+            <TextField
+              floatingLabelText='New Selection'
+              onChange={this.handleChanges}
+              name='title'
+              value={this.state.title}
+            />
+            <RaisedButton
+              label='Add Selection'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className='PlaceHolder'>
+          <p>
+            Oops, nothing here yet:(
+          </p>
+          <TextField
+            floatingLabelText='New Selection'
+            onChange={this.handleChanges}
+            name='title'
+            value={this.state.title}
+          />
+          <RaisedButton
+            label='Add Selection'
+            labelColor={pinkA400}
+            onClick={this.handleSubmit}
+          />
+        </div>
+      )
+    }
   }
 }
 
