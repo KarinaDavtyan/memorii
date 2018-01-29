@@ -5,15 +5,49 @@ import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
+import WordsList from '../components/WordsList';
+
 class Submit extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.fetchWords();
+  }
 
   state = {
     firstWord: '',
-    secondWord: ''
+    secondWord: '',
+    selection: decodeURIComponent(window.location.pathname.split('/')[2]),
+    words: '',
+    sending: false
+  }
+
+  fetchWords = () => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${this.state.selection}`, {
+      headers: {
+        'Authorization': `Bearer ${this.props.auth}`,
+        'Content-type': 'application/json'
+      }
+    })
+      .then(words => words.json())
+      .then(words => {
+        this.setState({
+          words
+        })
+      })
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    if (nextState.sending && !this.state.sending) {
+      this.fetchWords();
+      this.setState({
+        sending: !this.state.sending
+      })
+    }
   }
 
   saveWords = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/pair', {
+    fetch('http://Karina-MacBookPro.local:3000/words', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,18 +58,18 @@ class Submit extends React.Component {
   }
 
   handleSubmit = () => {
-    const { username } = this.props;
-    const { firstWord, secondWord } = this.state;
+    const { firstWord, secondWord, selection } = this.state;
 
     this.saveWords({
       firstWord,
       secondWord,
-      username
+      selection
     })
 
     this.setState({
       firstWord: '',
-      secondWord: ''
+      secondWord: '',
+      sending: !this.state.sending
     })
   }
 
@@ -89,6 +123,7 @@ class Submit extends React.Component {
             </Link>
           </div>
         </div>
+        <WordsList words={this.state.words} />
       </div>
     )
   }
