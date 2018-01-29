@@ -81,6 +81,11 @@ a {
   overflow: auto;
 }
 
+.WordsContainer{
+  height: 40vh;
+  overflow: auto;
+}
+
 .addSelectionButton {
   display: flex;
   flex-direction: column;
@@ -93,6 +98,12 @@ a {
 }
 
 .PaperContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.WordsTitle {
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -123,7 +123,7 @@ class Submit extends React.Component {
             </Link>
           </div>
         </div>
-        <WordsList words={this.state.words} />
+        <WordsList words={this.state.words} selection={this.state.selection} />
       </div>
     )
   }
