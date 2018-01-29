@@ -62,7 +62,7 @@ class Routes extends React.Component {
           />
           <Route path="/register" component={Register}/>
           <Route path="/login" component={LogInForm}/>
-          {/* <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/> */}
+          <PrivateRoute path="/:username/:selection" auth={this.props.auth} component={Submit}/>
           <PrivateRoute path="/:username" auth={this.props.auth} component={UserPage}/>
         </Switch>
       </Router>

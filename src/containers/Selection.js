@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
+import { Link }  from 'react-router-dom';
 
 
 class Selection extends React.Component {
@@ -39,11 +40,13 @@ class Selection extends React.Component {
           <div className='SelectionItem' key={selection._id}>
             <Paper style={style} zDepth={2} >
               <div className='PaperContainer'>
-                <div className='SelectionTitle' onClick={()=> this.setState({ selection : selection.title })}>
-                  <p>
-                    {selection.title}
-                  </p>
-                </div>
+                <Link to={`/${this.props.username}/${this.state.selection}`}>
+                  <div className='SelectionTitle' onMouseUp={()=> this.setState({ selection : selection.title })}>
+                    <p>
+                      {selection.title}
+                    </p>
+                  </div>
+                </Link>
                 <div className='DeleteButton'>
                   <FlatButton
                     label='DELETE'
