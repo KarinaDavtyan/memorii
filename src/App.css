@@ -112,3 +112,7 @@ a {
 .SelectionTitle {
   padding-left: 10px;
 }
+
+.Word {
+  display: flex;
+}

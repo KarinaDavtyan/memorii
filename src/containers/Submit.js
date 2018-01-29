@@ -122,6 +122,14 @@ class Submit extends React.Component {
               />
             </Link>
           </div>
+          <div className='rightButton'>
+            <Link to={`/${this.props.username}`}>
+              <RaisedButton
+                label='Selections'
+                labelColor={pinkA400}
+              />
+            </Link>
+          </div>
         </div>
         <WordsList words={this.state.words} selection={this.state.selection} />
       </div>

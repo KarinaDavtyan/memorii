@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
-
+import Paper from 'material-ui/Paper';
 
 
 class WordsList extends React.Component {
@@ -18,14 +18,19 @@ class WordsList extends React.Component {
   }
 
   renderWordsList = () => {
+    const style = {
+      padding: 5
+    };
     if (this.props.words) {
       let words = this.props.words.map(word => {
         return (
           <div className='WordsItem' key={word._id}>
             <div className='WordsTitle'>
-              <p>
-                {word.firstWord} & {word.secondWord}
-              </p>
+              <div className="Word">
+                <Paper style={style}> {word.secondWord} </Paper>
+                <Paper style={style}> {word.firstWord} </Paper>
+              </div>
+              {/* </div> */}
               <div className='DeleteButton'>
                 <FlatButton
                   label='DELETE'
