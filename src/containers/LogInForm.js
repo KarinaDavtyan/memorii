@@ -37,19 +37,21 @@ class LogInForm extends React.Component {
   render () {
     return (
       <div className='LogInForm'>
-        <TextField
-          floatingLabelText='Username'
-          onChange={this.handleChanges}
-          name='username'
-          value={this.state.username}
-        />
-        <TextField
-          floatingLabelText='Password'
-          onChange={this.handleChanges}
-          name='password'
-          value={this.state.password}
-          type='password'
-        />
+        <div className='TextField'>
+          <TextField
+            floatingLabelText='Username'
+            onChange={this.handleChanges}
+            name='username'
+            value={this.state.username}
+          />
+          <TextField
+            floatingLabelText='Password'
+            onChange={this.handleChanges}
+            name='password'
+            value={this.state.password}
+            type='password'
+          />
+        </div>
         <div className="buttons">
           <div className='leftButton'>
             <Link to={`/${this.state.username}`}>

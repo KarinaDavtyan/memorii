@@ -41,19 +41,21 @@ class Register extends React.Component {
   render () {
     return (
       <div className='Register'>
-        <TextField
-          floatingLabelText='Username'
-          onChange={this.handleChanges}
-          name='username'
-          value={this.state.username}
-        />
-        <TextField
-          floatingLabelText='Password'
-          onChange={this.handleChanges}
-          name='password'
-          value={this.state.password}
-          type='password'
-        />
+        <div className='TextField'>
+          <TextField
+            floatingLabelText='Username'
+            onChange={this.handleChanges}
+            name='username'
+            value={this.state.username}
+          />
+          <TextField
+            floatingLabelText='Password'
+            onChange={this.handleChanges}
+            name='password'
+            value={this.state.password}
+            type='password'
+          />
+        </div>
         <Link to='/login'>
           <div className="buttons">
             <RaisedButton

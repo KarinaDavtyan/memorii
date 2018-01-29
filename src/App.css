@@ -14,11 +14,13 @@ a {
 .App {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   z-index: 0;
-  align-items: center;
-  justify-content: center;
   background-color: #E6ECF0;
+}
+
+.UserPath {
+  width: 100vw;
+  align-self: center;
 }
 
 .Submit {
@@ -31,8 +33,14 @@ a {
   z-index: 1;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
 }
 
+.TextField {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
 .inputs {
   display: flex;
   flex-wrap: wrap;
@@ -50,10 +58,13 @@ a {
 .LogInForm, .Register {
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  align-self: center;
 }
 
 .UserPage {
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
