@@ -16,6 +16,7 @@ class WordsList extends React.Component {
       }
     })
   }
+  
 
   renderWordsList = () => {
     const style = {

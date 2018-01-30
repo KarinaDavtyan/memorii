@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
+import { selectionsChange } from '../actions';
+
 
 import Selection from './Selection';
 
@@ -15,6 +17,12 @@ class UserPage extends React.Component {
 
   state = {
     selections: ''
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.selection !== nextProps.selection) {
+      this.fetchSelections();
+    }
   }
 
   fetchSelections = () => {
@@ -55,14 +63,16 @@ class UserPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.token,
-    username: state.auth.user
+    username: state.auth.user,
+    selection: state.selection.selectionsChange
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
-  })
+  }),
+  selectionsChange: () =>  dispatch(selectionsChange())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

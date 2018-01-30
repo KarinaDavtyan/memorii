@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
+import { selectionsChange } from '../actions';
 
 
 class Selection extends React.Component {
@@ -13,7 +14,18 @@ class Selection extends React.Component {
   state = {
     toDelete: '',
     selection: '',
-    title: ''
+    title: '',
+    selections: ''
+  }
+
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.selections.length !== nextProps.selections.length) {
+      console.log(this.props.selections, nextProps.selections);
+      this.setState({
+        selections: nextProps.selections.length
+      })
+    }
   }
 
   handleSubmit = () => {
@@ -22,6 +34,7 @@ class Selection extends React.Component {
     this.setState({
       title:''
     })
+    this.props.selectionsChange();
   }
 
   handleChanges = (e) => {
@@ -52,6 +65,11 @@ class Selection extends React.Component {
       }
     })
   }
+
+  // handleDelete = (title) => {
+  //   this.deleteSelection(title);
+  //   this.props.selectionsChange();
+  // }
 
   renderSelection = () => {
     const style = {
@@ -133,6 +151,10 @@ class Selection extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  selectionsChange: () =>  dispatch(selectionsChange())
+})
+
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.token,
@@ -140,4 +162,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, null)(Selection);
+export default connect(mapStateToProps, mapDispatchToProps)(Selection);
