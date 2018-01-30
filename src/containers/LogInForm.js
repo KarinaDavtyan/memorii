@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
-import { Link }  from 'react-router-dom';
+import { Link, Redirect, withRouter  }  from 'react-router-dom';
 
 class LogInForm extends React.Component {
 
@@ -11,6 +11,17 @@ class LogInForm extends React.Component {
     username: '',
     password: ''
   }
+
+  componentWillUpdate (nextProps, nextState) {
+    if (nextProps.auth !== this.props.auth) {
+      console.log(nextProps.auth);
+      <Redirect to='/register' />
+    }
+  }
+
+  componentWillUnmount () {
+  console.log('About UNMOUNT');
+}
 
   fetchUserSession = () => {
     let { username, password } = this.state;
@@ -54,7 +65,7 @@ class LogInForm extends React.Component {
         </div>
         <div className="buttons">
           <div className='leftButton'>
-            <Link to={`/${this.state.username}`}>
+            <Link to={`/${this.props.username}`}>
               <RaisedButton
                 label='Log In'
                 labelColor={pinkA400}
@@ -84,7 +95,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.token
+  auth: state.auth.token,
+  username: state.auth.user
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogInForm));

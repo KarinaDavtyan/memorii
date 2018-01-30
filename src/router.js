@@ -38,7 +38,7 @@ const EntryRoute = ({component: Component, auth, username, ...rest}) => {
     <Route
       {...rest} render={props => (
         auth === null ? (
-          <Component {...props} {...rest}/>
+          <Component  {...props} {...rest}/>
         ) : (
           <Redirect to={{
             pathname: `${username}`,
@@ -69,6 +69,7 @@ class Routes extends React.Component {
     )
   }
 }
+
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
