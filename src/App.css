@@ -11,11 +11,28 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.App {
+
+a:hover {
+  color: #F50057
+}
+
+.Container {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  background-color: #E6ECF0;
+}
+
+.App {
+  height: 91.5vh;
   display: flex;
   z-index: 0;
   background-color: #E6ECF0;
+}
+
+.AppBar {
+  display: block;
 }
 
 .UserPath {
@@ -45,15 +62,22 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton, .leftButton, .rightButton {
+  padding: 10px;
+}
+
+.backToSelections {
+  align-self: flex-start;
   padding: 10px;
 }
 .buttons {
   display: flex;
   justify-content: center;
 }
+
 
 .LogInForm, .Register {
   display: flex;
@@ -63,7 +87,6 @@ a {
 }
 
 .UserPage {
-  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -77,7 +100,7 @@ a {
 }
 
 .SelectionContainer {
-  height: 50vh;
+  height: 70vh;
   overflow: auto;
 }
 
@@ -115,4 +138,15 @@ a {
 
 .Word {
   display: flex;
+}
+
+.InputButtonSelection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.addSelectionInput, .addSelectionButton {
+  padding: 5px 10px 5px 10px
 }

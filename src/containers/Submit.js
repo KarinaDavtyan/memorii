@@ -92,53 +92,46 @@ class Submit extends React.Component {
     console.log('mount');
     return (
       <div className='Submit'>
+        <div className='backToSelections'>
+          <Link to={`/${this.props.username}`}>
+            <RaisedButton
+              label='Back to selections'
+              labelColor={pinkA400}
+            />
+          </Link>
+        </div>
         <div>
           <p>
             Insert pair of words you want to learn.
           </p>
         </div>
-        <div className='inputs'>
-          <div className='firstInput'>
-            <TextField
-              floatingLabelText='One'
-              onChange={this.handleChanges}
-              name='firstWord'
-              value={this.state.firstWord}
-            />
-          </div>
-          <div className='secondInput'>
-            <TextField
-              floatingLabelText='Two'
-              onChange={this.handleChanges}
-              name='secondWord'
-              value={this.state.secondWord}
-            />
-          </div>
-        </div>
-        <div className='buttons'>
-          <div className='leftButton'>
-            <RaisedButton
-              label='Send'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
-          </div>
-          <div className='rightButton'>
-            <Link to={'/login'}>
-              <RaisedButton
-                label='LogOut'
-                labelColor={pinkA400}
-                onClick={this.props.clearAuthorization}
+        <div className='SEND'>
+          <div className='inputs'>
+            <div className='firstInput'>
+              <TextField
+                floatingLabelText='One'
+                onChange={this.handleChanges}
+                name='firstWord'
+                value={this.state.firstWord}
               />
-            </Link>
-          </div>
-          <div className='rightButton'>
-            <Link to={`/${this.props.username}`}>
-              <RaisedButton
-                label='Selections'
-                labelColor={pinkA400}
+            </div>
+            <div className='secondInput'>
+              <TextField
+                floatingLabelText='Two'
+                onChange={this.handleChanges}
+                name='secondWord'
+                value={this.state.secondWord}
               />
-            </Link>
+            </div>
+          </div>
+          <div className='buttons'>
+            <div className='sendButton'>
+              <RaisedButton
+                label='Send'
+                labelColor={pinkA400}
+                onClick={this.handleSubmit}
+              />
+            </div>
           </div>
         </div>
         <WordsList

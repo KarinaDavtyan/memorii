@@ -20,9 +20,7 @@ class App extends Component {
   render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className="App">
-          <Router />
-        </div>
+        <Router />
       </MuiThemeProvider>
     );
   }

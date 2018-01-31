@@ -70,24 +70,25 @@ class Selection extends React.Component {
     if (this.props.selections.length > 0) {
       return (
         <div className="SelectionList">
-          <h1>
-            {this.props.username}'s Selections
-          </h1>
           <div className="SelectionContainer">
             {this.renderSelection()}
           </div>
-          <div className='addSelectionButton'>
-            <TextField
-              floatingLabelText='New Selection'
-              onChange={this.handleChanges}
-              name='title'
-              value={this.state.title}
-            />
-            <RaisedButton
-              label='Add Selection'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
+          <div className='InputButtonSelection'>
+            <div className='addSelectionInput'>
+              <TextField
+                floatingLabelText='New Selection'
+                onChange={this.handleChanges}
+                name='title'
+                value={this.state.title}
+              />
+            </div>
+            <div className='addSelectionButton'>
+              <RaisedButton
+                label='Add Selection'
+                labelColor={pinkA400}
+                onClick={this.handleSubmit}
+              />
+            </div>
           </div>
         </div>
       )

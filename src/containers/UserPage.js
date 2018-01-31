@@ -71,15 +71,6 @@ class UserPage extends React.Component {
             onDelete={this.deleteSelection}
           />
         </div>
-        <div className="UserPage-LogoutButton">
-          <Link to={'/login'}>
-            <RaisedButton
-              label='LogOut'
-              labelColor={pinkA400}
-              onClick={this.props.clearAuthorization}
-            />
-          </Link>
-        </div>
       </div>
     )
   }
