@@ -1,8 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link }  from 'react-router-dom';
-import RaisedButton from 'material-ui/RaisedButton';
-import { pinkA400 } from 'material-ui/styles/colors';
 
 import Selection from './Selection';
 
@@ -64,13 +61,11 @@ class UserPage extends React.Component {
   render () {
     return (
       <div className="UserPage">
-        <div className='Selection'>
-          <Selection
-            selections={this.state.selections}
-            onSave={this.saveSelection}
-            onDelete={this.deleteSelection}
-          />
-        </div>
+        <Selection
+          selections={this.state.selections}
+          onSave={this.saveSelection}
+          onDelete={this.deleteSelection}
+        />
       </div>
     )
   }

@@ -1,11 +1,8 @@
 import React from 'react';
 import Bar from 'material-ui/AppBar';
-import { pinkA400}  from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-
 
 
 class AppBar extends React.Component {
