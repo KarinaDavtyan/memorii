@@ -8,13 +8,12 @@ import Selection from './Selection';
 
 class UserPage extends React.Component {
 
-  constructor (props) {
-    super(props);
-    this.fetchSelections();
-  }
-
   state = {
     selections: ''
+  }
+
+  componentDidMount () {
+    this.fetchSelections();
   }
 
   fetchSelections = () => {
@@ -32,11 +31,45 @@ class UserPage extends React.Component {
       })
   }
 
+  saveSelection = (data) => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        this.fetchSelections();
+      })
+  }
+
+  deleteSelection = (data) => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data)
+        this.fetchSelections();
+      })
+  }
+
   render () {
     return (
       <div className="UserPage">
         <div className='Selection'>
-          <Selection  selections={this.state.selections} />
+          <Selection
+            selections={this.state.selections}
+            onSave={this.saveSelection}
+            onDelete={this.deleteSelection}
+          />
         </div>
         <div className="UserPage-LogoutButton">
           <Link to={'/login'}>

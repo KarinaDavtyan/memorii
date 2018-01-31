@@ -9,8 +9,7 @@ import WordsList from '../components/WordsList';
 
 class Submit extends React.Component {
 
-  constructor (props) {
-    super(props);
+  componentDidMount () {
     this.fetchWords();
   }
 
@@ -18,8 +17,7 @@ class Submit extends React.Component {
     firstWord: '',
     secondWord: '',
     selection: decodeURIComponent(window.location.pathname.split('/')[2]),
-    words: '',
-    sending: false
+    words: ''
   }
 
   fetchWords = () => {
@@ -37,15 +35,6 @@ class Submit extends React.Component {
       })
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (nextState.sending && !this.state.sending) {
-      this.fetchWords();
-      this.setState({
-        sending: !this.state.sending
-      })
-    }
-  }
-
   saveWords = (data) => {
     fetch('http://Karina-MacBookPro.local:3000/words', {
       method: 'POST',
@@ -55,6 +44,26 @@ class Submit extends React.Component {
       },
       body: JSON.stringify(data)
     })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        this.fetchWords()
+      })
+  }
+
+  deleteWords = (firstWord, secondWord) => {
+    fetch(`http://Karina-MacBookPro.local:3000/words/${firstWord}/${secondWord}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        this.fetchWords()
+      })
   }
 
   handleSubmit = () => {
@@ -66,10 +75,10 @@ class Submit extends React.Component {
       selection
     })
 
+
     this.setState({
       firstWord: '',
-      secondWord: '',
-      sending: !this.state.sending
+      secondWord: ''
     })
   }
 
@@ -80,6 +89,7 @@ class Submit extends React.Component {
   }
 
   render () {
+    console.log('mount');
     return (
       <div className='Submit'>
         <div>
@@ -131,7 +141,11 @@ class Submit extends React.Component {
             </Link>
           </div>
         </div>
-        <WordsList words={this.state.words} selection={this.state.selection} />
+        <WordsList
+          words={this.state.words}
+          selection={this.state.selection}
+          onDelete={this.deleteWords}
+        />
       </div>
     )
   }

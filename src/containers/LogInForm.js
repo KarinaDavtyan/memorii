@@ -3,13 +3,21 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
-import { Link }  from 'react-router-dom';
+import { Link, Redirect }  from 'react-router-dom';
 
 class LogInForm extends React.Component {
 
   state = {
     username: '',
     password: ''
+  }
+
+  redirect = () => {
+    if (this.props.auth) {
+      return (
+        <Redirect to={`/${this.props.username}`} />
+      )
+    }
   }
 
   fetchUserSession = () => {
@@ -37,6 +45,7 @@ class LogInForm extends React.Component {
   render () {
     return (
       <div className='LogInForm'>
+        {this.redirect()}
         <div className='TextField'>
           <TextField
             floatingLabelText='Username'
@@ -54,13 +63,11 @@ class LogInForm extends React.Component {
         </div>
         <div className="buttons">
           <div className='leftButton'>
-            <Link to={`/${this.state.username}`}>
-              <RaisedButton
-                label='Log In'
-                labelColor={pinkA400}
-                onClick={this.handleSubmit}
-              />
-            </Link>
+            <RaisedButton
+              label='Log In'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
           </div>
           <div className='rightButton'>
             <Link to='/'>
@@ -84,7 +91,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-  auth: state.auth.token
+  auth: state.auth.token,
+  username: state.auth.user
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
