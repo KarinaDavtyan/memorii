@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { showNotification } from '../actions';
 
 import Selection from './Selection';
 
@@ -38,7 +39,7 @@ class UserPage extends React.Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data);
+        this.props.showNotification(`Added ${data} selection`)
         this.fetchSelections();
       })
   }
@@ -53,7 +54,7 @@ class UserPage extends React.Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data)
+        this.props.showNotification(`Deleted ${data} selection`)
         this.fetchSelections();
       })
   }
@@ -81,7 +82,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
-  })
+  }),
+  showNotification: (msg) => dispatch(showNotification(msg))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

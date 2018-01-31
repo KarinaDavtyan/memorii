@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-
 import Submit from './containers/Submit';
 import Register from './components/Register';
 import UserPath from './components/UserPath';

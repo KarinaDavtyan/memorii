@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
+import { showNotification } from '../actions';
 
 import WordsList from '../components/WordsList';
 
@@ -46,7 +47,7 @@ class Submit extends React.Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data);
+        this.props.showNotification(`Added ${data.first} and ${data.second} words`)
         this.fetchWords()
       })
   }
@@ -61,7 +62,7 @@ class Submit extends React.Component {
     })
       .then(data => data.json())
       .then(data => {
-        console.log(data);
+        this.props.showNotification(`Deleted ${data.first} and ${data.second} words`)
         this.fetchWords()
       })
   }
@@ -74,8 +75,6 @@ class Submit extends React.Component {
       secondWord,
       selection
     })
-
-
     this.setState({
       firstWord: '',
       secondWord: ''
@@ -89,7 +88,6 @@ class Submit extends React.Component {
   }
 
   render () {
-    console.log('mount');
     return (
       <div className='Submit'>
         <div className='backToSelections'>
@@ -155,7 +153,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
-  })
+  }),
+  showNotification: (msg) => dispatch(showNotification(msg))
 })
 
 

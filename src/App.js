@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {pinkA400} from 'material-ui/styles/colors';
+import { pinkA400 } from 'material-ui/styles/colors';
+import Snackbar from 'material-ui/Snackbar';
+import { connect } from 'react-redux';
 
 import './App.css';
-
 import Router from './router';
 
 const muiTheme = getMuiTheme({
@@ -20,10 +21,22 @@ class App extends Component {
   render () {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Router />
+        <div>
+          <Router />
+          <Snackbar
+            open={(new Date()).getTime() <= this.props.noteTime}
+            message={this.props.noteMsg}
+            autoHideDuration={5000}
+          />
+        </div>
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  noteTime: state.notification.notificationTime,
+  noteMsg: state.notification.notificationMessage
+})
+
+export default connect(mapStateToProps, null)(App);

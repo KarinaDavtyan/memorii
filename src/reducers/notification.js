@@ -1,5 +1,3 @@
-import * as actions from '../actions'
-
 const defaultState = {
   notificationTime: null,
   notificationMessage: '',

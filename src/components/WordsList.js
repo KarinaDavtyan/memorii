@@ -17,8 +17,8 @@ class WordsList extends React.Component {
           <div className='WordsItem' key={word._id}>
             <div className='WordsTitle'>
               <div className="Word">
-                <Paper style={style}> {word.secondWord} </Paper>
                 <Paper style={style}> {word.firstWord} </Paper>
+                <Paper style={style}> {word.secondWord} </Paper>
               </div>
               <div className='DeleteButton'>
                 <FlatButton
