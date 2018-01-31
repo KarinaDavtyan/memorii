@@ -6,35 +6,26 @@ import TextField from 'material-ui/TextField';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
-import { selectionsChange } from '../actions';
 
+import { ReverseSort } from '../helpers';
 
 class Selection extends React.Component {
 
   state = {
-    toDelete: '',
     selection: '',
     title: '',
-    selections: ''
-  }
-
-
-  componentWillReceiveProps (nextProps) {
-    if (this.props.selections.length !== nextProps.selections.length) {
-      console.log(this.props.selections, nextProps.selections);
-      this.setState({
-        selections: nextProps.selections.length
-      })
-    }
   }
 
   handleSubmit = () => {
     const { title } = this.state;
-    this.saveSelections(title);
+    this.props.onSave(title);
     this.setState({
       title:''
     })
-    this.props.selectionsChange();
+  }
+
+  handleDelete = (title) => {
+    this.props.onDelete(title)
   }
 
   handleChanges = (e) => {
@@ -43,40 +34,12 @@ class Selection extends React.Component {
     })
   }
 
-
-  deleteSelection = (data) => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      }
-    })
-      .then(data => data.json())
-      .then(data => data)
-  }
-
-  saveSelections = (data) => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      }
-    })
-  }
-
-  // handleDelete = (title) => {
-  //   this.deleteSelection(title);
-  //   this.props.selectionsChange();
-  // }
-
   renderSelection = () => {
     const style = {
       margin: 20
     };
     if (this.props.selections) {
-      let selections = this.props.selections.map(selection => {
+      let selections = this.props.selections.sort(ReverseSort).map(selection => {
         return (
           <div className='SelectionItem' key={selection._id}>
             <Paper style={style} zDepth={2} >
@@ -91,7 +54,7 @@ class Selection extends React.Component {
                 <div className='DeleteButton'>
                   <FlatButton
                     label='DELETE'
-                    onClick={() => this.deleteSelection(selection.title)}
+                    onClick={() => this.handleDelete(selection.title)}
                   />
                 </div>
               </div>
@@ -151,10 +114,6 @@ class Selection extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  selectionsChange: () =>  dispatch(selectionsChange())
-})
-
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.token,
@@ -162,4 +121,5 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Selection);
+
+export default connect(mapStateToProps, null)(Selection);

@@ -4,13 +4,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
+import moment from 'moment';
 
 import WordsList from '../components/WordsList';
 
 class Submit extends React.Component {
 
-  constructor (props) {
-    super(props);
+  componentDidMount () {
     this.fetchWords();
   }
 

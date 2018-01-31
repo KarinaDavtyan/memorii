@@ -3,26 +3,17 @@ import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
-import { selectionsChange } from '../actions';
-
 
 import Selection from './Selection';
 
 class UserPage extends React.Component {
 
-  constructor (props) {
-    super(props);
-    this.fetchSelections();
-  }
-
   state = {
     selections: ''
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.selection !== nextProps.selection) {
-      this.fetchSelections();
-    }
+  componentDidMount () {
+    this.fetchSelections();
   }
 
   fetchSelections = () => {
@@ -40,11 +31,45 @@ class UserPage extends React.Component {
       })
   }
 
+  saveSelection = (data) => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        this.fetchSelections();
+      })
+  }
+
+  deleteSelection = (data) => {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.auth}`
+      }
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data)
+        this.fetchSelections();
+      })
+  }
+
   render () {
     return (
       <div className="UserPage">
         <div className='Selection'>
-          <Selection  selections={this.state.selections} />
+          <Selection
+            selections={this.state.selections}
+            onSave={this.saveSelection}
+            onDelete={this.deleteSelection}
+          />
         </div>
         <div className="UserPage-LogoutButton">
           <Link to={'/login'}>
@@ -63,16 +88,14 @@ class UserPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.token,
-    username: state.auth.user,
-    selection: state.selection.selectionsChange
+    username: state.auth.user
   };
 }
 
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
-  }),
-  selectionsChange: () =>  dispatch(selectionsChange())
+  })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
