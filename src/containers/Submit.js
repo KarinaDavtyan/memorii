@@ -35,8 +35,6 @@ class Submit extends React.Component {
       })
   }
 
-
-
   saveWords = (data) => {
     fetch('http://Karina-MacBookPro.local:3000/words', {
       method: 'POST',

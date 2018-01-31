@@ -3,12 +3,9 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch,
-  withRouter
+  Switch
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import Snackbar from 'material-ui/Snackbar';
 
 import Submit from './containers/Submit';
 import Register from './components/Register';
@@ -17,7 +14,6 @@ import UserPage from './containers/UserPage';
 import LogInForm from './containers/LogInForm';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
-  console.log('its here', auth);
   return (
     <Route
       {...rest} render={props => (
