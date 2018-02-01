@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { showNotification } from '../actions';
+import { checkStatus } from '../helpers';
+
 
 import Selection from './Selection';
 
@@ -21,11 +24,17 @@ class UserPage extends React.Component {
         'Content-type': 'application/json'
       }
     })
+      .then(checkStatus)
       .then(selections => selections.json())
       .then(selections => {
         this.setState({
           selections
         })
+      })
+      .catch(error => {
+        error.status === 401 ?
+          this.props.clearAuthorization()
+          : console.log(error);
       })
   }
 
