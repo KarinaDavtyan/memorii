@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 import SelectionIcon from '../components/SelectionIcon';
 
 class ChatDesktop extends React.Component {
+  renderSelectionItems = () => {
+    console.log(this.props.selections);
+    if (this.props.selections) {
+      let selections = this.props.selections.map(selection => {
+        return (
+          <SelectionIcon title={selection.title} key={selection._id} />
+        )
+      })
+      return selections;
+    }
+  }
 
   render () {
     return (
@@ -16,7 +27,7 @@ class ChatDesktop extends React.Component {
         <div className='ChatBox'>
           <div className='ChatContainer'>
             <div className='SelectionListChat'>
-              <SelectionIcon />
+              {this.renderSelectionItems()}
             </div>
           </div>
           <div className='ChatContainerFooter'>
@@ -40,7 +51,8 @@ class ChatDesktop extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user
+  username: state.auth.user,
+  selections: state.selections.list
 })
 
 export default connect(mapStateToProps, null)(ChatDesktop);

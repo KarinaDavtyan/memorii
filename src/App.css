@@ -170,20 +170,23 @@ a:hover {
 }
 
 .ChatContainer {
-  width: 90vw;
+  width: 89vw;
   height:70vh;
-  background-color: pink;
   align-self: center;
   overflow: auto;
+  border-color: white;
+  border-width: 0.5vw;
+  border-style: solid;
 }
 
 .SelectionListChat {
   background-color: white;
   height: 6vh;
   display: flex;
-  width: inherit;
   align-items: center;
   padding-left: 1vw;
+  width: 89vw;
+  overflow-x: scroll;
 }
 
 .SelectionIcon {
@@ -194,11 +197,12 @@ a:hover {
   border-width: 1px;
   border-radius: 18px 18px 5px;
   align-items: center;
+  margin-right: 1vw;
 }
 
 .SelectionType {
   height: 3.7vh;
-  width: 3.7vw;
+  width: 3.7vh;
   border-width: 1px;
   margin-top: 1.45vw;
   margin-left: -0.40vw;
@@ -215,6 +219,7 @@ a:hover {
   margin-right: 1vw;
   display: flex;
   align-items: center;
+  width: max-content;
 }
 
 
@@ -229,7 +234,7 @@ a:hover {
 
 }
 
-button {
+ .InputButtonChat > button {
   height: 4vh;
   width: 15vw;
   padding: 0;
@@ -267,7 +272,8 @@ input {
   border-width: 0;
   height: 4vh;
   font-size: 2.5vh;
-  width: 75vw;
+  width: 74.5vw;
+  padding-left: 0.5vw;
 }
 
 input:focus {
