@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import TextField from 'material-ui/TextField';
-
+import SelectionIcon from '../components/SelectionIcon';
 
 class ChatDesktop extends React.Component {
 
@@ -14,20 +13,24 @@ class ChatDesktop extends React.Component {
             Memorii chat room
           </h2>
         </div>
-        <div className='ChatContainer'>
-        </div>
-        <div className='ChatContainerFooter'>
-          <div className='Input'>
-            <input id='chatInput'>
-
-            </input>
+        <div className='ChatBox'>
+          <div className='ChatContainer'>
+            <div className='SelectionListChat'>
+              <SelectionIcon />
+            </div>
           </div>
-          <div className='InputButtonChat'>
-            <button>
-              <p>
-                send
-              </p>
-            </button>
+          <div className='ChatContainerFooter'>
+            <div className='Input'>
+              <input id='chatInput'>
+              </input>
+            </div>
+            <div className='InputButtonChat'>
+              <button>
+                <p>
+                  send
+                </p>
+              </button>
+            </div>
           </div>
         </div>
       </div>
