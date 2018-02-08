@@ -165,6 +165,10 @@ a:hover {
   flex-wrap: wrap;
 }
 
+.ChatBox {
+  align-self: center;
+}
+
 .ChatContainer {
   width: 90vw;
   height:70vh;
@@ -172,6 +176,48 @@ a:hover {
   align-self: center;
   overflow: auto;
 }
+
+.SelectionListChat {
+  background-color: white;
+  height: 6vh;
+  display: flex;
+  width: inherit;
+  align-items: center;
+  padding-left: 1vw;
+}
+
+.SelectionIcon {
+  display: flex;
+  height: 4vh;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 18px 18px 5px;
+  align-items: center;
+}
+
+.SelectionType {
+  height: 3.7vh;
+  width: 3.7vw;
+  border-width: 1px;
+  margin-top: 1.45vw;
+  margin-left: -0.40vw;
+  border-color: #F50057;
+  border-style: solid;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.SelectionTitleIcon {
+  height: 3vh;
+  margin-right: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+
 
 .ChatContainerFooter {
   display: flex;
@@ -184,38 +230,43 @@ a:hover {
 }
 
 button {
-  height: 3vh;
+  height: 4vh;
   width: 15vw;
   padding: 0;
   margin: 0;
   background-color: white;
   border-color:  white white white #E6ECF0;
-  /*border-color: white;*/
 }
+
 button > p {
   margin: 0;
-  font-size: 1.5vh;
+  font-size: 2.5vh;
 }
+
 button:focus {
   outline-color: #F50057;
+  outline-width: thin;
 }
+
 button:hover {
   cursor: pointer;
+  color: #F50057
+}
+
+button:active {
+  border-style: none;
 }
 
 p:focus {
   outline: none;
 }
 
-.Input {
-  /*width: 75vw;*/
-}
 input {
   width: inherit;
   padding: 0;
   border-width: 0;
-  height: 3vh;
-  font-size: 1.5vh;
+  height: 4vh;
+  font-size: 2.5vh;
   width: 75vw;
 }
 
