@@ -7,6 +7,44 @@ import { Link } from 'react-router-dom';
 
 class AppBar extends React.Component {
 
+  renderLinks = () => {
+    return (
+      <div className='Links'>
+        <a href='https://web.telegram.org/#/im?p=@memorii_bot'>
+          <h3>
+            @memorii_bot
+          </h3>
+        </a>
+        <h3>
+          /
+        </h3>
+        <Link to='/chat'>
+          <h3>
+            memorii_chat
+          </h3>
+        </Link>
+      </div>
+    )
+  }
+
+  renderLogButton = () => {
+    return (
+      this.props.auth
+        ?
+        <div>
+          <FlatButton
+            label='Log Out'
+            onClick={this.props.clearAuthorization}
+          />
+        </div>
+        :
+        <Link to='/login'>
+          <FlatButton
+            label='Log In'
+          />
+        </Link>
+    )
+  }
   render () {
     const style = {
       left: {
@@ -23,31 +61,8 @@ class AppBar extends React.Component {
       <div className="AppBar">
         <Bar
           style={style.main}
-          iconElementLeft={
-            <div>
-              <a href='https://web.telegram.org/#/im?p=@memorii_bot'>
-                <h3>
-                  @memorii_bot
-                </h3>
-              </a>
-            </div>
-          }
-          iconElementRight={
-            this.props.auth
-              ?
-              <div>
-                <FlatButton
-                  label='Log Out'
-                  onClick={this.props.clearAuthorization}
-                />
-              </div>
-              :
-              <Link to='/login'>
-                <FlatButton
-                  label='Log In'
-                />
-              </Link>
-          }
+          iconElementLeft={this.renderLinks()}
+          iconElementRight={this.renderLogButton()}
           iconStyleLeft={style.left}
           iconStyleRight={style.right}
         />
