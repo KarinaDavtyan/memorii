@@ -3,7 +3,8 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
+
+h1, h2 {
   text-align: center;
 }
 
@@ -149,4 +150,75 @@ a:hover {
 
 .addSelectionInput, .addSelectionButton {
   padding: 5px 10px 5px 10px
+}
+
+.Links {
+  display: flex;
+}
+
+
+.ChatDesktop {
+  display: flex;
+  flex-direction: column;
+  height: 90.5vh;
+  width: 100vw;
+  flex-wrap: wrap;
+}
+
+.ChatContainer {
+  width: 90vw;
+  height:70vh;
+  background-color: pink;
+  align-self: center;
+  overflow: auto;
+}
+
+.ChatContainerFooter {
+  display: flex;
+  align-self: center;
+  width: 90vw;
+}
+
+.InputButtonChat {
+
+}
+
+button {
+  height: 3vh;
+  width: 15vw;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border-color:  white white white #E6ECF0;
+  /*border-color: white;*/
+}
+button > p {
+  margin: 0;
+  font-size: 1.5vh;
+}
+button:focus {
+  outline-color: #F50057;
+}
+button:hover {
+  cursor: pointer;
+}
+
+p:focus {
+  outline: none;
+}
+
+.Input {
+  /*width: 75vw;*/
+}
+input {
+  width: inherit;
+  padding: 0;
+  border-width: 0;
+  height: 3vh;
+  font-size: 1.5vh;
+  width: 75vw;
+}
+
+input:focus {
+  outline: none;
 }
