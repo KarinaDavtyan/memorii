@@ -2,14 +2,38 @@ import React from 'react';
 import './css/ChatDesktop.css';
 import { connect } from 'react-redux';
 import SelectionIcon from '../components/SelectionIcon';
+import WordCard from '../components/WordCard';
 
 class ChatDesktop extends React.Component {
+
+  state = {
+    words: '  '
+  }
+
+  fetchWords (title) {
+    fetch(`http://Karina-MacBookPro.local:3000/selection/${title}`, {
+      headers: {
+        'Authorization': `Bearer ${this.props.auth}`,
+        'Content-type': 'application/json'
+      }
+    })
+      .then(words => words.json())
+      .then(words => {
+        this.setState({
+          words
+        })
+        console.log(this.state);
+      })
+  }
+
+
   renderSelectionItems = () => {
+    console.log(this.fetchWords);
     if (this.props.selections) {
       let selections = this.props.selections.map(selection => {
         return (
-          <button key={selection._id}>
-            <SelectionIcon title={selection.title} />
+          <button key={selection._id} onClick={() => this.fetchWords(selection.title)}>
+            <SelectionIcon title={selection.title}  />
           </button>
         )
       })
@@ -20,15 +44,13 @@ class ChatDesktop extends React.Component {
   render () {
     return (
       <div className="ChatDesktop">
-        <div>
-          <h2>
-            Memorii chat room
-          </h2>
-        </div>
         <div className='ChatBox'>
           <div className='ChatContainer'>
             <div className='SelectionListChat'>
               {this.renderSelectionItems()}
+            </div>
+            <div className='WordCardContainer'>
+              <WordCard/>
             </div>
           </div>
           <div className='ChatContainerFooter'>

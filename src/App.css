@@ -53,6 +53,10 @@ a:hover {
   width: 100%;
 }
 
+.SendElements {
+  margin-top: -5vh;
+}
+
 .TextField {
   display: flex;
   flex-direction: column;
@@ -68,6 +72,7 @@ a:hover {
 .firstInput, .secondInput, .yesButton, .noButton, .loginButton, .registerButton, .leftButton, .rightButton {
   padding: 10px;
 }
+
 
 .backToSelections {
   align-self: flex-start;
@@ -105,8 +110,11 @@ a:hover {
 }
 
 .WordsContainer{
-  height: 40vh;
-  overflow: auto;
+  height: 50vw;
+  /*overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;*/
 }
 
 .addSelectionButton {
