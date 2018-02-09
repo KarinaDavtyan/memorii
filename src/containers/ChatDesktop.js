@@ -8,11 +8,35 @@ class ChatDesktop extends React.Component {
 
   state = {
     words: '',
-    inputBlock: true,
-    userInput: '',
     currentQuest: 'Choose selection',
+    userInput: '',
     currentAnswer: '',
-    answer: false
+    finish: false,
+    gotChosen: false
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.finish !== this.state.finish) {
+      this.setState({
+        currentQuest: 'Choose selection',
+        inputBlock: true,
+        finish: false
+      })
+    }
+  }
+
+  renderStartButton = () => {
+    if (this.state.gotChosen) {
+      return (
+        <button
+          onClick={this.handleStartButton}
+        >
+          <p>
+            start
+          </p>
+        </button>
+      )
+    }
   }
 
   fetchWords (title) {
@@ -31,11 +55,11 @@ class ChatDesktop extends React.Component {
         });
         this.setState({
           words: twoWords,
-          currentQuest: 'Press start when ready'
+          currentQuest: 'Press start when ready',
+          gotChosen: !this.state.gotChosen
         })
       })
   }
-
 
   renderSelectionItems = () => {
     if (this.props.selections) {
@@ -54,18 +78,19 @@ class ChatDesktop extends React.Component {
     if (twoWords.length > 0 ) {
       let currQuest = Object.keys(twoWords[0])[0];
       let currAnswer = Object.values(twoWords[0])[0];
-      console.log(currQuest, currAnswer);
-      console.log(twoWords, '2');
       this.setState({
         currentQuest: currQuest,
-        currentAnswer: currAnswer,
-        inputBlock: !this.state.inputBlock
+        currentAnswer: currAnswer
       })
       twoWords.shift();
       this.setState({
         words: twoWords
       })
 
+    } else {
+      this.setState({
+        finish: !this.state.finish
+      })
     }
   }
 
@@ -76,17 +101,20 @@ class ChatDesktop extends React.Component {
 
   handleStartButton = () => {
     this.train();
+    this.setState({
+      gotChosen: !this.state.gotChosen
+    })
   }
 
   handleSendButton = () => {
     this.setState({
-      userInput: '',
-      answer: !this.state.answer
+      userInput: ''
     })
-    console.log('here');
-    console.log(this.state);
     if (this.state.userInput === this.state.currentAnswer) {
       console.log('correct');
+      this.train();
+    } else {
+      console.log('incorrect');
     }
   }
 
@@ -105,17 +133,10 @@ class ChatDesktop extends React.Component {
     })
   }
 
-
   render () {
     return (
       <div className="ChatDesktop">
-        <button
-          onClick={this.handleStartButton}
-        >
-          <p>
-            start
-          </p>
-        </button>
+        {this.renderStartButton()}
         <div className='ChatBox'>
           <div className='ChatContainer'>
             <div className='SelectionListChat'>
@@ -131,7 +152,7 @@ class ChatDesktop extends React.Component {
                 name='userInput'
                 onChange={this.handleChanges}
                 value={this.state.userInput}
-                disabled={this.state.inputBlock}
+                onKeyPress={(e) => e.key === 'Enter' ? this.handleSendButton() : null}
               >
               </input>
             </div>
