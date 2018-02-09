@@ -5,6 +5,7 @@
   height: 90.5vh;
   width: 100vw;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ChatBox {
@@ -25,10 +26,9 @@
 
 .SelectionListChat {
   background-color: white;
-  height: 6vh;
+  height: 8vh;
   display: flex;
   align-items: center;
-  padding-left: 1vw;
   width: 89vw;
   overflow-x: scroll;
 }
@@ -137,4 +137,30 @@ input {
 
 input:focus {
   outline: none;
+}
+
+.WordCardContainer {
+  width: inherit;
+  height: 20vh;
+  margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+}
+
+.WordCard {
+  background-color: white;
+  height: 62%;
+  width: fit-content;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1.5vh 1.5vh 4.5vh -1vh grey;
+  font-size: 3vh;
+}
+
+.WordCardTitle {
+  width: fit-content;
 }
