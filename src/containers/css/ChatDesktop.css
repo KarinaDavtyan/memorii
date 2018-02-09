@@ -1,0 +1,140 @@
+
+.ChatDesktop {
+  display: flex;
+  flex-direction: column;
+  height: 90.5vh;
+  width: 100vw;
+  flex-wrap: wrap;
+}
+
+.ChatBox {
+  align-self: center;
+}
+
+.ChatContainer {
+  width: 89vw;
+  height:70vh;
+  align-self: center;
+  overflow: auto;
+  border-color: white;
+  border-width: 0.5vw;
+  border-style: solid;
+  border-bottom: none;
+  border-top: none;
+}
+
+.SelectionListChat {
+  background-color: white;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  width: 89vw;
+  overflow-x: scroll;
+}
+
+.SelectionIcon {
+  display: flex;
+  height: 4vh;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 18px 18px 5px;
+  align-items: center;
+  margin-right: 1vw;
+  font-family: 'Raleway', sans-serif;
+}
+
+.SelectionIcon:hover {
+  transform: skew(-6deg);
+}
+
+.SelectionType {
+  height: 3.7vh;
+  width: 3.7vh;
+  border-width: 0.2vh;
+  margin-top: 1.45vh;
+  margin-left: -0.40vh;
+  border-color: #F50057;
+  border-style: solid;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.3vh;
+}
+
+.SelectionTitleIcon {
+  height: 3.2vh;
+  margin-right: 1vw;
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.ChatContainerFooter {
+  display: flex;
+  align-self: center;
+  width: 90vw;
+}
+
+.InputButtonChat > button:focus {
+  outline: none;
+  letter-spacing: 1vw;
+}
+
+ .InputButtonChat > button {
+  height: 4vh;
+  width: 15vw;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border-color:  white white white #E6ECF0;
+}
+
+
+
+.SelectionListChat > button {
+  border: none;
+  padding: none;
+  background-color: inherit;
+  font-size: 1.5vh;
+}
+
+.SelectionListChat > button:focus {
+  outline: none;
+  font-size: 2vh;
+}
+
+.InputButtonChat > button > p {
+  margin: 0;
+  font-size: 2.5vh;
+  font-family: 'Raleway', sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+  color: #F50057
+}
+
+button:active {
+  border-style: none;
+}
+
+p:focus {
+  outline: none;
+}
+
+input {
+  width: inherit;
+  padding: 0;
+  border-width: 0;
+  height: 4vh;
+  font-size: 2.5vh;
+  width: 74.5vw;
+  padding-left: 0.5vw;
+}
+
+input:focus {
+  outline: none;
+}

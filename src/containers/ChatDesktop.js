@@ -1,6 +1,6 @@
 import React from 'react';
+import './css/ChatDesktop.css';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import SelectionIcon from '../components/SelectionIcon';
 
 class ChatDesktop extends React.Component {
@@ -8,8 +8,8 @@ class ChatDesktop extends React.Component {
     if (this.props.selections) {
       let selections = this.props.selections.map(selection => {
         return (
-          <button>
-            <SelectionIcon title={selection.title} key={selection._id} />
+          <button key={selection._id}>
+            <SelectionIcon title={selection.title} />
           </button>
         )
       })

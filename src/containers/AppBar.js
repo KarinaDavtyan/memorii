@@ -7,24 +7,18 @@ import { Link } from 'react-router-dom';
 
 class AppBar extends React.Component {
 
+  state = {
+    chat: false
+  }
+
   chatOption = () => {
-    if (window.location.pathname == '/chat') {
-      return (
-        <Link to='/chat'>
-          <h3>
-            memorii_chat
-          </h3>
-        </Link>
-      )
-    } else {
-      return (
-        <Link to={`/${this.props.username}`}>
-          <h3>
-            home
-          </h3>
-        </Link>
-      )
-    }
+    return (
+      <Link to='/chat'>
+        <h3>
+          memorii_chat
+        </h3>
+      </Link>
+    )
   }
   renderLinks = () => {
     return (

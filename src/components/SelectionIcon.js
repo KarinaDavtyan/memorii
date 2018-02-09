@@ -6,7 +6,7 @@ class SelectionIcon extends React.Component {
       <div className='SelectionIcon'>
         <div className='SelectionType'>
           <p>
-            A
+            Aあ
           </p>
         </div>
         <div className='SelectionTitleIcon'>
