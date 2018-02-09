@@ -30,7 +30,7 @@ class UserPage extends React.Component {
         this.setState({
           selections
         })
-        this.props.getSelections(selections);
+        this.props.getSelections(selections)
       })
       .catch(error => {
         error.status === 401 ?

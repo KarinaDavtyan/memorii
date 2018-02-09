@@ -5,11 +5,12 @@ import SelectionIcon from '../components/SelectionIcon';
 
 class ChatDesktop extends React.Component {
   renderSelectionItems = () => {
-    console.log(this.props.selections);
     if (this.props.selections) {
       let selections = this.props.selections.map(selection => {
         return (
-          <SelectionIcon title={selection.title} key={selection._id} />
+          <button>
+            <SelectionIcon title={selection.title} key={selection._id} />
+          </button>
         )
       })
       return selections;

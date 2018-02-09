@@ -3,7 +3,6 @@ body {
   font-family: sans-serif;
 }
 
-
 h1, h2 {
   text-align: center;
 }
@@ -177,6 +176,8 @@ a:hover {
   border-color: white;
   border-width: 0.5vw;
   border-style: solid;
+  border-bottom: none;
+  border-top: none;
 }
 
 .SelectionListChat {
@@ -204,8 +205,8 @@ a:hover {
   height: 3.7vh;
   width: 3.7vh;
   border-width: 1px;
-  margin-top: 1.45vw;
-  margin-left: -0.40vw;
+  margin-top: 1.45vh;
+  margin-left: -0.40vh;
   border-color: #F50057;
   border-style: solid;
   border-radius: 50%;
@@ -230,8 +231,9 @@ a:hover {
   width: 90vw;
 }
 
-.InputButtonChat {
-
+.InputButtonChat > button:focus {
+  outline: none;
+  letter-spacing: 1vw;
 }
 
  .InputButtonChat > button {
@@ -243,14 +245,23 @@ a:hover {
   border-color:  white white white #E6ECF0;
 }
 
-button > p {
-  margin: 0;
-  font-size: 2.5vh;
+
+
+.SelectionListChat > button {
+  border: none;
+  padding: none;
+  background-color: inherit;
 }
 
-button:focus {
-  outline-color: #F50057;
-  outline-width: thin;
+.SelectionListChat > button:focus {
+  outline: none;
+  font-size: 2vh;
+}
+
+.InputButtonChat > button > p {
+  margin: 0;
+  font-size: 2.5vh;
+  font-weight: 150;
 }
 
 button:hover {
