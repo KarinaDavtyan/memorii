@@ -103,7 +103,7 @@ class Submit extends React.Component {
             Insert pair of words you want to learn.
           </p>
         </div>
-        <div className='SEND'>
+        <div className='SendElements'>
           <div className='inputs'>
             <div className='firstInput'>
               <TextField

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showNotification } from '../actions';
+import { showNotification, getSelections } from '../actions';
 import { checkStatus } from '../helpers';
 
 
@@ -30,6 +30,7 @@ class UserPage extends React.Component {
         this.setState({
           selections
         })
+        this.props.getSelections(selections)
       })
       .catch(error => {
         error.status === 401 ?
@@ -84,7 +85,7 @@ class UserPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.token,
-    username: state.auth.user
+    username: state.auth.user,
   };
 }
 
@@ -92,7 +93,8 @@ const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
     type: 'CLEAR_AUTHORIZATION'
   }),
-  showNotification: (msg) => dispatch(showNotification(msg))
+  showNotification: (msg) => dispatch(showNotification(msg)),
+  getSelections: (list) => dispatch(getSelections(list))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

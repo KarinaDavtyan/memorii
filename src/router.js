@@ -13,6 +13,7 @@ import UserPath from './components/UserPath';
 import UserPage from './containers/UserPage';
 import LogInForm from './containers/LogInForm';
 import AppBar from './containers/AppBar';
+import ChatDesktop from './containers/ChatDesktop';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -62,6 +63,7 @@ class Routes extends React.Component {
               />
               <Route path="/register" component={Register}/>
               <Route path="/login" component={LogInForm}/>
+              <PrivateRoute path="/chat" auth={this.props.auth} component={ChatDesktop}/>
               <PrivateRoute path="/:username/:selection" auth={this.props.auth} component={Submit}/>
               <PrivateRoute path="/:username" auth={this.props.auth} component={UserPage}/>
             </Switch>

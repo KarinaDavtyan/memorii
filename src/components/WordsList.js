@@ -38,7 +38,7 @@ class WordsList extends React.Component {
   render () {
     return (
       <div className='WordsList'>
-        <h1>{this.props.selection}</h1>
+        <h3>{this.props.selection}</h3>
         <div className='WordsContainer'>
           {this.renderWordsList()}
         </div>
