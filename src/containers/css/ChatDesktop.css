@@ -31,6 +31,7 @@
   align-items: center;
   width: 89vw;
   overflow-x: scroll;
+  box-shadow: 52px -24px 60px black;
 }
 
 .SelectionIcon {
@@ -39,7 +40,8 @@
   border-color: black;
   border-style: solid;
   border-width: 1px;
-  border-radius: 18px 18px 5px;
+  /*border-radius: 18px 18px 5px;*/
+  border-radius: 15px 15px 15px 15px;
   align-items: center;
   margin-right: 1vw;
   font-family: 'Raleway', sans-serif;
@@ -62,6 +64,7 @@
   display: flex;
   justify-content: center;
   font-size: 1.3vh;
+  box-shadow: 2px 2px 11px -3px #F50057;
 }
 
 .SelectionTitleIcon {
@@ -78,9 +81,13 @@
   width: 90vw;
 }
 
-.InputButtonChat > button:focus {
+.InputButtonChat > button:active {
   outline: none;
   letter-spacing: 1vw;
+}
+
+.InputButtonChat > button:focus {
+  outline: none;
 }
 
  .InputButtonChat > button {
@@ -101,9 +108,13 @@
   font-size: 1.5vh;
 }
 
-.SelectionListChat > button:focus {
+.SelectionListChat > button:active{
   outline: none;
   font-size: 2vh;
+}
+
+.SelectionListChat > button:focus{
+  outline: none;
 }
 
 .InputButtonChat > button > p {
@@ -159,6 +170,8 @@ input:focus {
   justify-content: center;
   box-shadow: 1.5vh 1.5vh 4.5vh -1vh grey;
   font-size: 3vh;
+  border-radius: 5px 91px 96px 98px;
+  border-top: 2px black solid;
 }
 
 .WordCardTitle {

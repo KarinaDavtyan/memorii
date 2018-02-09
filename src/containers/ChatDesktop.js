@@ -7,7 +7,12 @@ import WordCard from '../components/WordCard';
 class ChatDesktop extends React.Component {
 
   state = {
-    words: '  '
+    words: '',
+    inputBlock: true,
+    userInput: '',
+    currentQuest: 'Choose selection',
+    currentAnswer: '',
+    answer: false
   }
 
   fetchWords (title) {
@@ -19,16 +24,20 @@ class ChatDesktop extends React.Component {
     })
       .then(words => words.json())
       .then(words => {
+        let twoWords = words.map((word) => {
+          return {
+            [word.firstWord]: word.secondWord
+          }
+        });
         this.setState({
-          words
+          words: twoWords,
+          currentQuest: 'Press start when ready'
         })
-        console.log(this.state);
       })
   }
 
 
   renderSelectionItems = () => {
-    console.log(this.fetchWords);
     if (this.props.selections) {
       let selections = this.props.selections.map(selection => {
         return (
@@ -40,26 +49,96 @@ class ChatDesktop extends React.Component {
       return selections;
     }
   }
+  repetition (words) {
+    let twoWords = words;
+    if (twoWords.length > 0 ) {
+      let currQuest = Object.keys(twoWords[0])[0];
+      let currAnswer = Object.values(twoWords[0])[0];
+      console.log(currQuest, currAnswer);
+      console.log(twoWords, '2');
+      this.setState({
+        currentQuest: currQuest,
+        currentAnswer: currAnswer,
+        inputBlock: !this.state.inputBlock
+      })
+      twoWords.shift();
+      this.setState({
+        words: twoWords
+      })
+
+    }
+  }
+
+  train = () => {
+    let { words } = this.state;
+    this.repetition(words)
+  }
+
+  handleStartButton = () => {
+    this.train();
+  }
+
+  handleSendButton = () => {
+    this.setState({
+      userInput: '',
+      answer: !this.state.answer
+    })
+    console.log('here');
+    console.log(this.state);
+    if (this.state.userInput === this.state.currentAnswer) {
+      console.log('correct');
+    }
+  }
+
+  renderWordCard = () => {
+    const { currentQuest } = this.state;
+    if (currentQuest.length > 0) {
+      return (
+        <WordCard current={currentQuest} />
+      )
+    }
+  }
+
+  handleChanges = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
 
   render () {
     return (
       <div className="ChatDesktop">
+        <button
+          onClick={this.handleStartButton}
+        >
+          <p>
+            start
+          </p>
+        </button>
         <div className='ChatBox'>
           <div className='ChatContainer'>
             <div className='SelectionListChat'>
               {this.renderSelectionItems()}
             </div>
             <div className='WordCardContainer'>
-              <WordCard/>
+              {this.renderWordCard()}
             </div>
           </div>
           <div className='ChatContainerFooter'>
             <div className='Input'>
-              <input id='chatInput'>
+              <input
+                name='userInput'
+                onChange={this.handleChanges}
+                value={this.state.userInput}
+                disabled={this.state.inputBlock}
+              >
               </input>
             </div>
             <div className='InputButtonChat'>
-              <button>
+              <button
+                onClick={this.handleSendButton}
+              >
                 <p>
                   send
                 </p>

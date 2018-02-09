@@ -6,7 +6,7 @@ class WordsCard extends React.Component {
     return (
       <div className='WordCard'>
         <div className='WordCardTitle'>
-          おねがいします
+          {this.props.current}
         </div>
       </div>
     )
