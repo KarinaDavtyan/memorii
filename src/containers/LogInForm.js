@@ -5,6 +5,8 @@ import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect }  from 'react-router-dom';
 
+import { setAuthorization } from '../actions';
+
 class LogInForm extends React.Component {
 
   state = {
@@ -83,16 +85,13 @@ class LogInForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addAuthorization: (data) =>  dispatch({
-    type: 'SET_AUTHORIZATION',
-    data
-  })
-})
-
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
   username: state.auth.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addAuthorization: (data) =>  dispatch(setAuthorization(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

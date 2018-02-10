@@ -4,7 +4,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
-import { showNotification } from '../actions';
+import {
+  showNotification,
+  clearAuthorization
+} from '../actions';
 
 import WordsList from '../components/WordsList';
 
@@ -142,18 +145,13 @@ class Submit extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.token,
-    username: state.auth.user,
-
-  };
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  }),
+  clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg))
 })
 

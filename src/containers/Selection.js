@@ -115,12 +115,9 @@ class Selection extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.token,
-    username: state.auth.user
-  };
-}
-
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user
+})
 
 export default connect(mapStateToProps, null)(Selection);

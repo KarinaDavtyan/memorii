@@ -99,8 +99,6 @@
   border-color:  white white white #E6ECF0;
 }
 
-
-
 .SelectionListChat > button {
   border: none;
   padding: none;
@@ -108,16 +106,37 @@
   font-size: 1.5vh;
 }
 
-.SelectionListChat > button:active{
+.SelectionListChat > button:active,
+.StartButtonChat > button:active
+{
   outline: none;
   font-size: 2vh;
+  box-shadow: none;
 }
 
-.SelectionListChat > button:focus{
+.SelectionListChat > button:focus,
+.StartButtonChat > button:focus
+{
   outline: none;
 }
 
-.InputButtonChat > button > p {
+.StartButtonChat > button {
+  width: 30vw;
+  height: 7vh;
+  background-color: white;
+  border: 0.3vh solid #F50057;
+  border-radius: 2vh;
+  box-shadow: 4px 3px 14px -5px #F50057
+}
+
+.StartButtonChat {
+  align-self: center;
+  padding-bottom: 1vh;
+}
+
+.InputButtonChat > button > p,
+.StartButtonChat > button > p
+{
   margin: 0;
   font-size: 2.5vh;
   font-family: 'Raleway', sans-serif;

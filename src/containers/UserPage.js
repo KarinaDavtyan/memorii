@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showNotification, getSelections } from '../actions';
+import {
+  showNotification,
+  getSelections,
+  clearAuthorization
+} from '../actions';
 import { checkStatus } from '../helpers';
 
 
@@ -82,17 +86,13 @@ class UserPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.token,
-    username: state.auth.user,
-  };
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  }),
+  clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg)),
   getSelections: (list) => dispatch(getSelections(list))
 })
