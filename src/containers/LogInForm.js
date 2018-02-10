@@ -83,16 +83,16 @@ class LogInForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user
+})
+
 const mapDispatchToProps = (dispatch) => ({
   addAuthorization: (data) =>  dispatch({
     type: 'SET_AUTHORIZATION',
     data
   })
-})
-
-const mapStateToProps = (state) => ({
-  auth: state.auth.token,
-  username: state.auth.user
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

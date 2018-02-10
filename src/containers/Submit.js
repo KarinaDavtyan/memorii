@@ -142,13 +142,10 @@ class Submit extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth.token,
-    username: state.auth.user,
-
-  };
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user
+})
 
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch({
