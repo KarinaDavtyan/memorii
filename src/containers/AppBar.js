@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { clearAuthorization } from '../actions';
 
 class AppBar extends React.Component {
 
@@ -85,11 +86,9 @@ const mapStateToProps = (state) => ({
   auth: state.auth.token,
   username: state.auth.user
 })
-const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  })
-})
 
+const mapDispatchToProps = (dispatch) => ({
+  clearAuthorization: () => dispatch(clearAuthorization())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppBar);

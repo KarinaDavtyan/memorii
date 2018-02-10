@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showNotification, getSelections } from '../actions';
+import {
+  showNotification,
+  getSelections,
+  clearAuthorization
+} from '../actions';
 import { checkStatus } from '../helpers';
 
 
@@ -88,9 +92,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  }),
+  clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg)),
   getSelections: (list) => dispatch(getSelections(list))
 })

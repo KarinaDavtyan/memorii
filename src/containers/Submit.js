@@ -4,7 +4,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
-import { showNotification } from '../actions';
+import {
+  showNotification,
+  clearAuthorization
+} from '../actions';
 
 import WordsList from '../components/WordsList';
 
@@ -148,9 +151,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  }),
+  clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg))
 })
 
