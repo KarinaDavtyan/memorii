@@ -136,7 +136,9 @@ class ChatDesktop extends React.Component {
   render () {
     return (
       <div className="ChatDesktop">
-        {this.renderStartButton()}
+        <div className='StartButtonChat'>
+          {this.renderStartButton()}
+        </div>
         <div className='ChatBox'>
           <div className='ChatContainer'>
             <div className='SelectionListChat'>
