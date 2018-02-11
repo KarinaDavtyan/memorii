@@ -8,7 +8,7 @@ class ChatDesktop extends React.Component {
 
   state = {
     words: '',
-    currentQuest: 'Choose selection',
+    currentAnnounce: 'Choose selection',
     userInput: '',
     currentAnswer: '',
     finish: false,
@@ -18,7 +18,7 @@ class ChatDesktop extends React.Component {
   componentDidUpdate (prevProps, prevState) {
     if (prevState.finish !== this.state.finish) {
       this.setState({
-        currentQuest: 'Choose selection',
+        currentAnnounce: 'Choose selection',
         inputBlock: true,
         finish: false
       })
@@ -55,7 +55,7 @@ class ChatDesktop extends React.Component {
         });
         this.setState({
           words: twoWords,
-          currentQuest: 'Press start when ready',
+          currentAnnounce: 'Press start when ready',
           gotChosen: !this.state.gotChosen
         })
       })
@@ -79,7 +79,7 @@ class ChatDesktop extends React.Component {
       let currQuest = Object.keys(twoWords[0])[0];
       let currAnswer = Object.values(twoWords[0])[0];
       this.setState({
-        currentQuest: currQuest,
+        currentAnnounce: currQuest,
         currentAnswer: currAnswer
       })
       twoWords.shift();
@@ -119,10 +119,10 @@ class ChatDesktop extends React.Component {
   }
 
   renderWordCard = () => {
-    const { currentQuest } = this.state;
-    if (currentQuest.length > 0) {
+    const { currentAnnounce } = this.state;
+    if (currentAnnounce.length > 0) {
       return (
-        <WordCard current={currentQuest} />
+        <WordCard current={currentAnnounce} />
       )
     }
   }
