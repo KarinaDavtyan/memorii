@@ -13,12 +13,11 @@ import Selection from './Selection';
 
 class UserPage extends React.Component {
 
-  state = {
-    selections: ''
-  }
 
   componentDidMount () {
-    this.fetchSelections();
+    if (this.props.selections.length === 0) {
+      this.fetchSelections();
+    }
   }
 
   fetchSelections = () => {
@@ -31,9 +30,6 @@ class UserPage extends React.Component {
       .then(checkStatus)
       .then(selections => selections.json())
       .then(selections => {
-        this.setState({
-          selections
-        })
         this.props.getSelections(selections)
       })
       .catch(error => {
@@ -77,7 +73,7 @@ class UserPage extends React.Component {
     return (
       <div className="UserPage">
         <Selection
-          selections={this.state.selections}
+          selections={this.props.selections}
           onSave={this.saveSelection}
           onDelete={this.deleteSelection}
         />
@@ -88,7 +84,8 @@ class UserPage extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user
+  username: state.auth.user,
+  selections: state.selections.list
 })
 
 const mapDispatchToProps = (dispatch) => ({

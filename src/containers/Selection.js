@@ -40,12 +40,13 @@ class Selection extends React.Component {
     };
     if (this.props.selections) {
       let selections = this.props.selections.sort(ReverseSort).map(selection => {
+        let path = selection.title.replace(/\s/g, '');
         return (
           <div className='SelectionItem' key={selection._id}>
             <Paper style={style} zDepth={2} >
               <div className='PaperContainer'>
-                <Link to={`/${this.props.username}/${this.state.selection}`}>
-                  <div className='SelectionTitle' onMouseUp={()=> this.setState({ selection : selection.title })}>
+                <Link to={`/${this.props.username}/${path}`}>
+                  <div className='SelectionTitle'>
                     <p>
                       {selection.title}
                     </p>
