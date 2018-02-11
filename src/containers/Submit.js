@@ -8,6 +8,7 @@ import {
   showNotification,
   clearAuthorization
 } from '../actions';
+import { checkStatus } from '../helpers';
 
 import WordsList from '../components/WordsList';
 
@@ -20,7 +21,7 @@ class Submit extends React.Component {
   state = {
     firstWord: '',
     secondWord: '',
-    selection: decodeURIComponent(window.location.pathname.split('/')[2]),
+    selection: this.props.selection,
     words: ''
   }
 
@@ -31,11 +32,15 @@ class Submit extends React.Component {
         'Content-type': 'application/json'
       }
     })
+      .then(checkStatus)
       .then(words => words.json())
       .then(words => {
         this.setState({
           words
         })
+      })
+      .catch((error) => {
+        console.log(error);
       })
   }
 
@@ -147,7 +152,8 @@ class Submit extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user
+  username: state.auth.user,
+  selection: state.selections.current
 })
 
 const mapDispatchToProps = (dispatch) => ({

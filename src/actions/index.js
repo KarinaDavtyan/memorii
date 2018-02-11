@@ -8,6 +8,11 @@ export const getSelections = (list) => ({
   list
 })
 
+export const getCurrentSelection = (title) => ({
+  type: 'GET_CURRENT_SELECTION',
+  title
+})
+
 export const setAuthorization = (data) => ({
   type: 'SET_AUTHORIZATION',
   data

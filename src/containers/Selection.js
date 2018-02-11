@@ -7,6 +7,8 @@ import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 
+import { getCurrentSelection } from '../actions';
+
 import { ReverseSort } from '../helpers';
 
 class Selection extends React.Component {
@@ -39,30 +41,35 @@ class Selection extends React.Component {
       margin: 20
     };
     if (this.props.selections) {
-      let selections = this.props.selections.sort(ReverseSort).map(selection => {
-        let path = selection.title.replace(/\s/g, '');
-        return (
-          <div className='SelectionItem' key={selection._id}>
-            <Paper style={style} zDepth={2} >
-              <div className='PaperContainer'>
-                <Link to={`/${this.props.username}/${path}`}>
-                  <div className='SelectionTitle'>
-                    <p>
-                      {selection.title}
-                    </p>
+      let selections = this.props.selections
+        .sort(ReverseSort)
+        .map(selection => {
+          let path = selection.title.replace(/\s/g, '');
+          return (
+            <div className='SelectionItem' key={selection._id}>
+              <Paper style={style} zDepth={2} >
+                <div className='PaperContainer'>
+                  <Link
+                    to={`/${this.props.username}/${path}`}
+                    onClick={() => this.props.saveSelectionTitle(selection.title)}
+                  >
+                    <div className='SelectionTitle' >
+                      <p>
+                        {selection.title}
+                      </p>
+                    </div>
+                  </Link>
+                  <div className='DeleteButton'>
+                    <FlatButton
+                      label='DELETE'
+                      onClick={() => this.handleDelete(selection.title)}
+                    />
                   </div>
-                </Link>
-                <div className='DeleteButton'>
-                  <FlatButton
-                    label='DELETE'
-                    onClick={() => this.handleDelete(selection.title)}
-                  />
                 </div>
-              </div>
-            </Paper>
-          </div>
-        )
-      })
+              </Paper>
+            </div>
+          )
+        })
       return selections;
     }
   }
@@ -121,4 +128,8 @@ const mapStateToProps = (state) => ({
   username: state.auth.user
 })
 
-export default connect(mapStateToProps, null)(Selection);
+const mapDispatchToProps = (dispatch) => ({
+  saveSelectionTitle: (title) => dispatch(getCurrentSelection(title))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Selection);
