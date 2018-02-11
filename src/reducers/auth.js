@@ -10,11 +10,6 @@ const auth = (state = defaultState, action) => {
       token: action.data.token,
       user: action.data.user.username
     }
-  case 'CLEAR_AUTHORIZATION':
-    return {
-      token: null,
-      user: null
-    }
   default:
     return state;
   }

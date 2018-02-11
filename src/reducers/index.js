@@ -4,11 +4,17 @@ import auth from './auth';
 import notification from './notification';
 import selections from './selections';
 
-
-const reducers = combineReducers({
+const appReducers = combineReducers({
   auth,
   notification,
   selections
 })
 
-export default reducers;
+const rootReducer = (state, action) => {
+  if (action.type === 'CLEAR_AUTHORIZATION') {
+    state = undefined
+  }
+  return appReducers(state, action)
+}
+
+export default rootReducer;
