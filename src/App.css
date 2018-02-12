@@ -25,10 +25,11 @@ a:hover {
 }
 
 .App {
-  height: 91.5vh;
+  height: 93.5vh;
   display: flex;
   z-index: 0;
-  background-color: #E6ECF0;
+  /*background-color: #E6ECF0;*/
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)
 }
 
 .AppBar {
@@ -111,6 +112,7 @@ a:hover {
 
 .WordsContainer{
   height: 50vw;
+  width: 40vh;
   /*overflow: auto;
   display: flex;
   flex-direction: column;

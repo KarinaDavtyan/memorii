@@ -7,18 +7,35 @@ import { ReverseSort } from '../helpers';
 
 class WordsList extends React.Component {
 
-  renderWordsList = () => {
+  state = {
+    first: ''
+  }
+
+  renderWord = (first, second) => {
     const style = {
       padding: 5
     };
+    if (this.state.first === first) {
+      return <Paper style={style}> {second} </Paper>
+
+    } else {
+      return <Paper style={style}> {first} </Paper>
+    }
+  }
+  renderWordsList = () => {
     if (this.props.words) {
       let words = this.props.words.sort(ReverseSort).map(word => {
         return (
           <div className='WordsItem' key={word._id}>
             <div className='WordsTitle'>
-              <div className="Word">
-                <Paper style={style}> {word.firstWord} </Paper>
-                <Paper style={style}> {word.secondWord} </Paper>
+              <div className="Word"
+                onMouseEnter={() => {
+                  this.setState({
+                    first: word.firstWord
+                  })
+                }}
+              >
+                {this.renderWord(word.firstWord, word.secondWord)}
               </div>
               <div className='DeleteButton'>
                 <FlatButton
@@ -37,7 +54,13 @@ class WordsList extends React.Component {
 
   render () {
     return (
-      <div className='WordsList'>
+      <div className='WordsList'
+        onMouseLeave={() => {
+          this.setState({
+            first: ''
+          })
+        }}
+      >
         <h3>{this.props.selection}</h3>
         <div className='WordsContainer'>
           {this.renderWordsList()}
