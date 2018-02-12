@@ -40,7 +40,10 @@ class Submit extends React.Component {
         })
       })
       .catch((error) => {
-        console.log(error);
+        this.props.showNotification('Session expired');
+        error.status === 401
+          ? this.props.clearAuthorization()
+          : console.log(error)
       })
   }
 
