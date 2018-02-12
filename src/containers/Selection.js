@@ -20,14 +20,18 @@ class Selection extends React.Component {
 
   handleSubmit = () => {
     const { title } = this.state;
-    this.props.onSave(title);
+    this.props.onSave({
+      title
+    });
     this.setState({
       title:''
     })
   }
 
   handleDelete = (title) => {
-    this.props.onDelete(title)
+    this.props.onDelete({
+      title
+    })
   }
 
   handleChanges = (e) => {

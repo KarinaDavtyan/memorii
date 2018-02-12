@@ -46,7 +46,10 @@ class WordsList extends React.Component {
               })
             }}
             onDoubleClick={
-              () => this.props.onDelete(word.firstWord, word.secondWord)
+              () => this.props.onDelete({
+                firstWord: word.firstWord,
+                secondWord: word.secondWord
+              })
             }
           >
             {this.renderWord(word.firstWord, word.secondWord)}

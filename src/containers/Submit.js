@@ -63,13 +63,15 @@ class Submit extends React.Component {
       })
   }
 
-  deleteWords = (firstWord, secondWord) => {
-    fetch(`http://Karina-MacBookPro.local:3000/words/${firstWord}/${secondWord}`, {
+  deleteWords = (data) => {
+    console.log(data);
+    fetch('http://Karina-MacBookPro.local:3000/words', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.props.auth}`
-      }
+      },
+      body: JSON.stringify(data)
     })
       .then(data => data.json())
       .then(data => {
@@ -163,6 +165,5 @@ const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg))
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Submit);

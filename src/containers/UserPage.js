@@ -40,12 +40,13 @@ class UserPage extends React.Component {
   }
 
   saveSelection = (data) => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+    fetch('http://Karina-MacBookPro.local:3000/selection', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.props.auth}`
-      }
+      },
+      body: JSON.stringify(data)
     })
       .then(data => data.json())
       .then(data => {
@@ -55,12 +56,13 @@ class UserPage extends React.Component {
   }
 
   deleteSelection = (data) => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${data}`, {
+    fetch('http://Karina-MacBookPro.local:3000/selection', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.props.auth}`
-      }
+      },
+      body: JSON.stringify(data)
     })
       .then(data => data.json())
       .then(data => {
