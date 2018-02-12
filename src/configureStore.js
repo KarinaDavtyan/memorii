@@ -1,31 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 
+import logger from './middlewares/logger';
+import promise from './middlewares/promise';
 import reducer from './reducers/';
 import { loadState, saveState } from './LocalStorage';
 
-const logger = (store) => (next) => {
-  if (!console.group) return next;
-  return (action) => {
-    console.group(action.type);
-    console.group('%c prev state', 'color: gray', store.getState());
-    console.group('%c action', 'color: blue', action);
-    const returnValue = next(action);
-    console.group('%c next state', 'color: green', store.getState());
-    console.groupEnd(action.type);
-    return returnValue;
-  }
-}
-
-const promise = (store) => (next) => (action) => {
-  if (typeof action.then === 'function') {
-    return action.then(next);
-  }
-  return next(action);
-}
-
 const configureStore = () => {
-  const middlewares = [promise];
+  const middlewares = [promise, thunk];
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger);
