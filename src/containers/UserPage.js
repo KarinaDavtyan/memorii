@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import {
   showNotification,
   getSelections,
-  clearAuthorization
+  clearAuthorization,
+  getAllSelections
 } from '../actions';
 import { checkStatus } from '../helpers';
-
 
 import Selection from './Selection';
 
@@ -18,6 +18,7 @@ class UserPage extends React.Component {
     if (this.props.selections.length === 0) {
       this.fetchSelections();
     }
+    this.props.getAllSelections();
   }
 
   fetchSelections = () => {
@@ -93,7 +94,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg)),
-  getSelections: (list) => dispatch(getSelections(list))
+  getSelections: (list) => dispatch(getSelections(list)),
+  getAllSelections: () => dispatch(getAllSelections())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

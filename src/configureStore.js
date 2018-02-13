@@ -3,12 +3,13 @@ import thunk from 'redux-thunk';
 import throttle from 'lodash/throttle';
 
 import logger from './middlewares/logger';
+import api from './middlewares/api';
 import promise from './middlewares/promise';
 import reducer from './reducers/';
 import { loadState, saveState } from './LocalStorage';
 
 const configureStore = () => {
-  const middlewares = [promise, thunk];
+  const middlewares = [promise, thunk, api];
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger);
