@@ -28,7 +28,9 @@ const configureStore = () => {
   );
 
   store.subscribe(throttle(() => {
-    saveState(store.getState())
+    saveState({
+      auth:store.getState().auth
+    })
   }, 1000));
 
   return store;

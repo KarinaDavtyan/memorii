@@ -12,6 +12,17 @@ const selections = (state = defaultState, action) => {
       ...state,
       list: action.response
     }
+  case typeAction.POST_SELECTION_SUCCESS:
+    return {
+      ...state,
+      list: state.list.concat(action.response)
+    }
+  case typeAction.DELETE_SELECTION_SUCCESS:
+    return {
+      ...state,
+      list: state.list
+        .filter(item => item._id !== action.response._id)
+    }
   case typeAction.GET_CURRENT_SELECTION:
     return {
       ...state,

@@ -12,6 +12,32 @@ export const getAllSelections = () => ({
   }
 })
 
+export const POST_SELECTION_REQUEST = 'POST_SELECTION_REQUEST';
+export const POST_SELECTION_SUCCESS = 'POST_SELECTION_SUCCESS';
+export const POST_SELECTION_FAILURE = 'POST_SELECTION_FAILURE';
+
+export const postSelection = (data) => ({
+  [CALL_API] : {
+    types: [POST_SELECTION_REQUEST, POST_SELECTION_SUCCESS, POST_SELECTION_FAILURE],
+    endpoint: '/selection',
+    method: 'POST',
+    body: data
+  }
+})
+
+export const DELETE_SELECTION_REQUEST = 'DELETE_SELECTION_REQUEST';
+export const DELETE_SELECTION_SUCCESS = 'DELETE_SELECTION_SUCCESS';
+export const DELETE_SELECTION_FAILURE = 'DELETE_SELECTION_FAILURE';
+
+export const deleteSelection = (data) => ({
+  [CALL_API] : {
+    types: [DELETE_SELECTION_REQUEST, DELETE_SELECTION_SUCCESS, POST_SELECTION_FAILURE],
+    endpoint: '/selection',
+    method: 'DELETE',
+    body: data
+  }
+})
+
 export const showNotification = (msg) => ({
   type: 'SHOW_NOTIFICATION',
   msg

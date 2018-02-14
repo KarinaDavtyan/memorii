@@ -3,16 +3,16 @@ import { checkStatus } from '../helpers';
 
 const API_ROOT = 'http://localhost:3000';
 
-const callApi = (endpoint, token, method = 'GET') => {
+const callApi = (endpoint, token, body, method = 'GET') => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
 
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
   headers['Content-Type'] = 'application/json';
-  // console.log({method}, {headers}, fullUrl);
   return fetch(fullUrl, {
     method,
-    headers
+    headers,
+    body
   })
     .then(checkStatus)
     .then(response => response.json())
@@ -42,8 +42,11 @@ export default (store) => (next) => (action) => {
   const callAPI = action[CALL_API];
   if (typeof callAPI === 'undefined') return next(action)
 
-  let { endpoint } = callAPI;
+  let { endpoint, method } = callAPI;
   const { schema, types } = callAPI;
+
+  let body;
+  if (callAPI.body) body = JSON.stringify(callAPI.body);
 
   if (typeof endpoint !== 'string') throw new Error('Specify a string endpoint URL.')
   // if (!schema) throw new Error('Specify one of the exported Schemas.');
@@ -60,7 +63,7 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(endpoint, token)
+  return callApi(endpoint, token, body, method)
     .then(response => {
       next(actionWith({
         response,

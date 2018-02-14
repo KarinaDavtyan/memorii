@@ -6,5 +6,19 @@ export default (store) => (next) => (action) => {
       type: 'CLEAR_AUTHORIZATION'
     })
   }
+
+  if (action.type.match(/POST\S+SUCCESS/) !== null) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'Succesfully added'
+    })
+  }
+
+  if (action.type.match(/DELETE\S+SUCCESS/) !== null) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'Succesfully deleted'
+    })
+  }
   return next(action);
 }
