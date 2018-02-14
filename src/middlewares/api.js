@@ -74,7 +74,8 @@ export default (store) => (next) => (action) => {
     .catch((error) => {
       next(actionWith({
         type: failureType,
-        msg: error.statusText
+        msg: error.statusText,
+        error: error.status
       }))
     })
 
