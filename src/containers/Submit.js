@@ -5,75 +5,38 @@ import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
 import {
-  showNotification,
-  clearAuthorization
+  getWords,
+  postWords,
+  deleteWords
 } from '../actions';
 
 import WordsList from '../components/WordsList';
 
 class Submit extends React.Component {
 
-  componentDidMount () {
-    this.fetchWords();
-  }
-
   state = {
     firstWord: '',
     secondWord: '',
-    selection: decodeURIComponent(window.location.pathname.split('/')[2]),
+    selection: this.props.selection,
     words: ''
   }
 
-  fetchWords = () => {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${this.state.selection}`, {
-      headers: {
-        'Authorization': `Bearer ${this.props.auth}`,
-        'Content-type': 'application/json'
-      }
-    })
-      .then(words => words.json())
-      .then(words => {
-        this.setState({
-          words
-        })
-      })
+  componentDidMount () {
+    this.props.getWords(this.props.selection)
   }
 
-  saveWords = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/words', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      },
-      body: JSON.stringify(data)
-    })
-      .then(data => data.json())
-      .then(data => {
-        this.props.showNotification(`Added ${data.first} and ${data.second} words`)
-        this.fetchWords()
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.words !== this.props.words) {
+      this.setState({
+        words: this.props.words
       })
-  }
-
-  deleteWords = (firstWord, secondWord) => {
-    fetch(`http://Karina-MacBookPro.local:3000/words/${firstWord}/${secondWord}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      }
-    })
-      .then(data => data.json())
-      .then(data => {
-        this.props.showNotification(`Deleted ${data.first} and ${data.second} words`)
-        this.fetchWords()
-      })
+    }
   }
 
   handleSubmit = () => {
     const { firstWord, secondWord, selection } = this.state;
 
-    this.saveWords({
+    this.props.postWords({
       firstWord,
       secondWord,
       selection
@@ -138,7 +101,7 @@ class Submit extends React.Component {
         <WordsList
           words={this.state.words}
           selection={this.state.selection}
-          onDelete={this.deleteWords}
+          onDelete={(data) => this.props.deleteWords(data)}
         />
       </div>
     )
@@ -147,13 +110,15 @@ class Submit extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user
+  username: state.auth.user,
+  selection: state.selections.current,
+  words: state.words.list
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch(clearAuthorization()),
-  showNotification: (msg) => dispatch(showNotification(msg))
+  getWords: (path) => dispatch(getWords(path)),
+  postWords: (data) => dispatch(postWords(data)),
+  deleteWords: (data) => dispatch(deleteWords(data))
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Submit);

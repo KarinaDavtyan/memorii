@@ -3,24 +3,44 @@ import './css/ChatDesktop.css';
 import { connect } from 'react-redux';
 import SelectionIcon from '../components/SelectionIcon';
 import WordCard from '../components/WordCard';
+import { getWords, getAllSelections } from '../actions';
 
 class ChatDesktop extends React.Component {
 
   state = {
     words: '',
-    currentQuest: 'Choose selection',
+    currentAnnounce: 'Choose selection',
     userInput: '',
     currentAnswer: '',
     finish: false,
     gotChosen: false
   }
 
+  componentDidMount () {
+    if (this.props.selections.length === 0) {
+      this.props.getAllSelections();
+    }
+  }
+
   componentDidUpdate (prevProps, prevState) {
     if (prevState.finish !== this.state.finish) {
       this.setState({
-        currentQuest: 'Choose selection',
+        currentAnnounce: 'Choose selection',
         inputBlock: true,
         finish: false
+      })
+    }
+    if (prevProps.words !== this.props.words) {
+      let twoWords = this.props.words
+        .map((word) => {
+          return {
+            [word.firstWord]: word.secondWord
+          }
+        });
+      this.setState({
+        words: twoWords,
+        currentAnnounce: 'Press start when ready',
+        gotChosen: !this.state.gotChosen
       })
     }
   }
@@ -39,33 +59,15 @@ class ChatDesktop extends React.Component {
     }
   }
 
-  fetchWords (title) {
-    fetch(`http://Karina-MacBookPro.local:3000/selection/${title}`, {
-      headers: {
-        'Authorization': `Bearer ${this.props.auth}`,
-        'Content-type': 'application/json'
-      }
-    })
-      .then(words => words.json())
-      .then(words => {
-        let twoWords = words.map((word) => {
-          return {
-            [word.firstWord]: word.secondWord
-          }
-        });
-        this.setState({
-          words: twoWords,
-          currentQuest: 'Press start when ready',
-          gotChosen: !this.state.gotChosen
-        })
-      })
-  }
-
   renderSelectionItems = () => {
     if (this.props.selections) {
       let selections = this.props.selections.map(selection => {
         return (
-          <button key={selection._id} onClick={() => this.fetchWords(selection.title)}>
+          <button
+            key={selection._id}
+            onClick={
+              () => this.props.getWords(selection.title)
+            }>
             <SelectionIcon title={selection.title}  />
           </button>
         )
@@ -79,7 +81,7 @@ class ChatDesktop extends React.Component {
       let currQuest = Object.keys(twoWords[0])[0];
       let currAnswer = Object.values(twoWords[0])[0];
       this.setState({
-        currentQuest: currQuest,
+        currentAnnounce: currQuest,
         currentAnswer: currAnswer
       })
       twoWords.shift();
@@ -119,10 +121,10 @@ class ChatDesktop extends React.Component {
   }
 
   renderWordCard = () => {
-    const { currentQuest } = this.state;
-    if (currentQuest.length > 0) {
+    const { currentAnnounce } = this.state;
+    if (currentAnnounce.length > 0) {
       return (
-        <WordCard current={currentQuest} />
+        <WordCard current={currentAnnounce} />
       )
     }
   }
@@ -177,7 +179,10 @@ class ChatDesktop extends React.Component {
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
   username: state.auth.user,
-  selections: state.selections.list
+  selections: state.selections.list,
+  words: state.words.list
 })
 
-export default connect(mapStateToProps, null)(ChatDesktop);
+export default connect(mapStateToProps,
+  { getWords, getAllSelections }
+)(ChatDesktop);

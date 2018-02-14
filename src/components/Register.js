@@ -3,18 +3,11 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA400 } from 'material-ui/styles/colors';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { createUser } from '../actions';
 
 class Register extends React.Component {
-
-  createUser = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/new-user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-  }
 
   state = {
     username: '',
@@ -29,7 +22,7 @@ class Register extends React.Component {
 
   handleSubmit = () => {
     let { username, password } = this.state;
-    this.createUser({
+    this.props.createUser({
       username,
       password
     })
@@ -80,4 +73,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default connect(null, { createUser })(Register);

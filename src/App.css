@@ -25,10 +25,11 @@ a:hover {
 }
 
 .App {
-  height: 91.5vh;
+  height: 93.5vh;
   display: flex;
   z-index: 0;
-  background-color: #E6ECF0;
+  /*background-color: #E6ECF0;*/
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)
 }
 
 .AppBar {
@@ -109,12 +110,42 @@ a:hover {
   overflow: auto;
 }
 
-.WordsContainer{
-  height: 50vw;
-  /*overflow: auto;
+.WordsList {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;*/
+  align-items: center;
+}
+
+.WordsContainer{
+  height: 50vw;
+  width: 80vw;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: center;
+  align-content: baseline;
+}
+
+.Word {
+  cursor: pointer;
+  padding: 1vh;
+  width: 17vw;
+}
+
+.WordsCard {
+  border: black solid 1px;
+  display: flex;
+  justify-content: center;
+}
+
+.WordsCard > p {
+  overflow: auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0;
+  margin: 0.5em;
+  font-size: 2vh;
 }
 
 .addSelectionButton {
@@ -134,19 +165,12 @@ a:hover {
   justify-content: space-between;
 }
 
-.WordsTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .SelectionTitle {
   padding-left: 10px;
 }
 
-.Word {
-  display: flex;
-}
+
 
 .InputButtonSelection {
   display: flex;
