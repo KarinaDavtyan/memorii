@@ -3,13 +3,13 @@ import { checkStatus } from '../helpers';
 
 const API_ROOT = 'http://localhost:3000';
 
-const callApi = (endpoint, token, body, method = 'GET', path) => {
+const callApi = (endpoint, token, body, method = 'GET', path, encoded) => {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
   if (path) fullUrl =  fullUrl + encodeURI(path);
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
+  if (encoded) headers.Authorization = `Basic ${encoded}`
   headers['Content-Type'] = 'application/json';
-  console.log({method}, {headers}, {body}, fullUrl, path);
   return fetch(fullUrl, {
     method,
     headers,
@@ -43,7 +43,7 @@ export default (store) => (next) => (action) => {
   const callAPI = action[CALL_API];
   if (typeof callAPI === 'undefined') return next(action)
 
-  let { endpoint, method, path } = callAPI;
+  let { endpoint, method, path, encoded } = callAPI;
   const { schema, types } = callAPI;
 
   let body;
@@ -64,7 +64,7 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(endpoint, token, body, method, path)
+  return callApi(endpoint, token, body, method, path, encoded)
     .then(response => {
       next(actionWith({
         response,

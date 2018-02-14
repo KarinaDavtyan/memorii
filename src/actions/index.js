@@ -13,6 +13,18 @@ export const createUser = (data) => ({
   }
 })
 
+export const GET_USER_SESSION_REQUEST = 'GET_USER_SESSION_REQUEST';
+export const GET_USER_SESSION_SUCCESS = 'GET_USER_SESSION_SUCCESS';
+export const GET_USER_SESSION_FAILURE = 'GET_USER_SESSION_FAILURE';
+
+export const getUserSession = (username, password) => ({
+  [CALL_API] : {
+    types: [GET_USER_SESSION_REQUEST, GET_USER_SESSION_SUCCESS, GET_USER_SESSION_FAILURE],
+    endpoint: '/sign-in',
+    encoded: btoa(`${username}:${password}`)
+  }
+})
+
 export const GET_SELECTIONS_REQUEST = 'GET_SELECTIONS_REQUEST';
 export const GET_SELECTIONS_SUCCESS = 'GET_SELECTIONS_SUCCESS';
 export const GET_SELECTIONS_FAILURE = 'GET_SELECTIONS_FAILURE';

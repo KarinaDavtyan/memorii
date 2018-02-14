@@ -5,7 +5,7 @@ import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect }  from 'react-router-dom';
 
-import { setAuthorization } from '../actions';
+import { getUserSession } from '../actions';
 
 class LogInForm extends React.Component {
 
@@ -22,18 +22,9 @@ class LogInForm extends React.Component {
     }
   }
 
-  fetchUserSession = () => {
+  handleSubmit = () => {
     let { username, password } = this.state;
-    const encoded = btoa(`${username}:${password}`);
-    fetch('http://Karina-MacBookPro.local:3000/sign-in', {
-      headers: {
-        'Authorization': `Basic ${encoded}`,
-      }
-    })
-      .then(user => user.json())
-      .then(user => {
-        this.props.addAuthorization(user);
-      })
+    this.props.getUserSession(username, password)
   }
 
   handleChanges = (e) => {
@@ -41,8 +32,6 @@ class LogInForm extends React.Component {
       [e.target.name]: e.target.value
     })
   }
-
-  handleSubmit = () => this.fetchUserSession();
 
   render () {
     return (
@@ -90,8 +79,4 @@ const mapStateToProps = (state) => ({
   username: state.auth.user
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  addAuthorization: (data) =>  dispatch(setAuthorization(data))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+export default connect(mapStateToProps, { getUserSession })(LogInForm);

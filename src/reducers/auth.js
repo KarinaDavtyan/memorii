@@ -4,11 +4,12 @@ const defaultState = {
 }
 
 const auth = (state = defaultState, action) => {
+
   switch (action.type) {
-  case 'SET_AUTHORIZATION':
+  case 'GET_USER_SESSION_SUCCESS':
     return {
-      token: action.data.token,
-      user: action.data.user.username
+      token: action.response.token,
+      user: action.response.user.username
     }
   default:
     return state;
