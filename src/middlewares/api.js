@@ -1,4 +1,5 @@
-import { normalize, schema } from 'normalizr'
+import { normalize, schema } from 'normalizr';
+import { checkStatus } from '../helpers';
 
 const API_ROOT = 'http://localhost:3000';
 
@@ -8,13 +9,15 @@ const callApi = (endpoint, token, method = 'GET') => {
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
   headers['Content-Type'] = 'application/json';
-  console.log({method}, {headers}, fullUrl);
+  // console.log({method}, {headers}, fullUrl);
   return fetch(fullUrl, {
     method,
     headers
   })
+    .then(checkStatus)
     .then(response => response.json())
     .then(data => data);
+
 }
 
 // const selectionSchema = new schema.Entity('selections');
@@ -59,14 +62,17 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  console.log(types, 'types');
-
   return callApi(endpoint, token)
     .then(response => {
-      console.log(response);
       next(actionWith({
         response,
         type: successType
+      }))
+    })
+    .catch((error) => {
+      next(actionWith({
+        type: failureType,
+        msg: error.statusText
       }))
     })
 

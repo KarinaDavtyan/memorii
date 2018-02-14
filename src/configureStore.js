@@ -11,9 +11,9 @@ import { loadState, saveState } from './LocalStorage';
 const configureStore = () => {
   const middlewares = [promise, thunk, api];
 
-  if (process.env.NODE_ENV !== 'production') {
-    middlewares.push(logger);
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   middlewares.push(logger);
+  // }
 
   const persistedState = loadState();
 

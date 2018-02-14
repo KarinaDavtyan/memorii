@@ -12,9 +12,9 @@ export const getAllSelections = () => ({
   }
 })
 
-export const showNotification = (notificationMessage) => ({
+export const showNotification = (msg) => ({
   type: 'SHOW_NOTIFICATION',
-  notificationMessage
+  msg
 })
 
 export const getSelections = (list) => ({
