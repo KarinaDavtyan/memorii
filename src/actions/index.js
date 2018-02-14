@@ -51,6 +51,18 @@ export const deleteSelection = (data) => ({
   }
 })
 
+export const GET_WORDS_REQUEST = 'GET_WORDS_REQUEST';
+export const GET_WORDS_SUCCESS = 'GET_WORDS_SUCCESS';
+export const GET_WORDS_FAILURE = 'GET_WORDS_FAILURE';
+
+export const getWords = (selection) => ({
+  [CALL_API] : {
+    types: [GET_WORDS_REQUEST, GET_WORDS_SUCCESS, GET_WORDS_FAILURE],
+    endpoint: '/selection',
+    path: `/${selection}`
+  }
+})
+
 export const showNotification = (msg) => ({
   type: 'SHOW_NOTIFICATION',
   msg
