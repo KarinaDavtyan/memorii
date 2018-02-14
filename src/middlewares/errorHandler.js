@@ -7,6 +7,13 @@ export default (store) => (next) => (action) => {
     })
   }
 
+  if (action.type.match(/CREATE\S+SUCCESS/) !== null) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'Succesfully created'
+    })
+  }
+
   if (action.type.match(/POST\S+SUCCESS/) !== null) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',

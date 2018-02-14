@@ -9,6 +9,7 @@ const callApi = (endpoint, token, body, method = 'GET') => {
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
   headers['Content-Type'] = 'application/json';
+  console.log({method}, {headers}, {body}, fullUrl);
   return fetch(fullUrl, {
     method,
     headers,

@@ -1,5 +1,18 @@
 import { CALL_API } from '../middlewares/api';
 
+export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
+
+export const createUser = (data) => ({
+  [CALL_API] : {
+    types: [CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILURE],
+    endpoint: '/new-user',
+    method: 'POST',
+    body: data
+  }
+})
+
 export const GET_SELECTIONS_REQUEST = 'GET_SELECTIONS_REQUEST';
 export const GET_SELECTIONS_SUCCESS = 'GET_SELECTIONS_SUCCESS';
 export const GET_SELECTIONS_FAILURE = 'GET_SELECTIONS_FAILURE';
