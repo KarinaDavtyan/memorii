@@ -4,13 +4,12 @@ import throttle from 'lodash/throttle';
 
 import logger from './middlewares/logger';
 import api from './middlewares/api';
-import promise from './middlewares/promise';
-import error from './middlewares/errorHandler';
+import responseHandler from './middlewares/responseHandler';
 import reducer from './reducers/';
 import { loadState, saveState } from './LocalStorage';
 
 const configureStore = () => {
-  const middlewares = [promise, thunk, api, error];
+  const middlewares = [thunk, api, responseHandler];
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger);
@@ -29,7 +28,8 @@ const configureStore = () => {
 
   store.subscribe(throttle(() => {
     saveState({
-      auth:store.getState().auth
+      auth:store.getState().auth,
+      selections:store.getState().selections
     })
   }, 1000));
 

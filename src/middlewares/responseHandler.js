@@ -1,9 +1,14 @@
-import * as typeAction from '../actions'
-
 export default (store) => (next) => (action) => {
   if (action.error && action.error === 401) {
     store.dispatch({
       type: 'CLEAR_AUTHORIZATION'
+    })
+  }
+
+  if (action.error && action.error === 404) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'No content yet'
     })
   }
 

@@ -9,7 +9,6 @@ import {
   postWords,
   deleteWords
 } from '../actions';
-import { checkStatus } from '../helpers';
 
 import WordsList from '../components/WordsList';
 

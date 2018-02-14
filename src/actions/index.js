@@ -33,7 +33,6 @@ export const getAllSelections = () => ({
   [CALL_API] : {
     types: [GET_SELECTIONS_REQUEST, GET_SELECTIONS_SUCCESS, GET_SELECTIONS_FAILURE],
     endpoint: '/all-selections'
-    // schema: Schemas.SELECTIONS
   }
 })
 
