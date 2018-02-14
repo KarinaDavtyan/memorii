@@ -53,9 +53,7 @@ export default (store) => (next) => (action) => {
 
   const actionWith = data => {
     const finalAction = Object.assign({}, action, data)
-    console.log(finalAction, 'finalaction before');
     delete finalAction[CALL_API]
-    console.log(finalAction, 'finalAction after');
     return finalAction
   }
 

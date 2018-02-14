@@ -5,15 +5,16 @@ import throttle from 'lodash/throttle';
 import logger from './middlewares/logger';
 import api from './middlewares/api';
 import promise from './middlewares/promise';
+import error from './middlewares/errorHandler';
 import reducer from './reducers/';
 import { loadState, saveState } from './LocalStorage';
 
 const configureStore = () => {
-  const middlewares = [promise, thunk, api];
+  const middlewares = [promise, thunk, api, error];
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   middlewares.push(logger);
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger);
+  }
 
   const persistedState = loadState();
 

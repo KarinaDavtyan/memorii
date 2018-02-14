@@ -14,7 +14,6 @@ const appReducers = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-  console.log(action.type);
   if (action.type === 'CLEAR_AUTHORIZATION') {
     state = undefined
   }
