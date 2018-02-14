@@ -17,11 +17,7 @@ export const showNotification = (msg) => ({
   msg
 })
 
-export const getSelections = (list) => ({
-  type: 'GET_SELECTIONS',
-  list
-})
-
+export const GET_CURRENT_SELECTION = 'GET_CURRENT_SELECTION';
 export const getCurrentSelection = (title) => ({
   type: 'GET_CURRENT_SELECTION',
   title

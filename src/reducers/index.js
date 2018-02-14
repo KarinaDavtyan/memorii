@@ -3,14 +3,12 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import notification from './notification';
 import selections from './selections';
-import selectionsAPI from './selectionsAPI';
 
 
 const appReducers = combineReducers({
   auth,
   notification,
-  selections,
-  selectionsAPI
+  selections
 })
 
 const rootReducer = (state, action) => {

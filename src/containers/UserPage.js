@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import {
   showNotification,
-  getSelections,
   clearAuthorization,
   getAllSelections
 } from '../actions';
@@ -16,9 +15,8 @@ class UserPage extends React.Component {
 
   componentDidMount () {
     if (this.props.selections.length === 0) {
-      this.fetchSelections();
+      this.props.getAllSelections();
     }
-    this.props.getAllSelections();
   }
 
   fetchSelections = () => {
@@ -52,7 +50,7 @@ class UserPage extends React.Component {
       .then(data => data.json())
       .then(data => {
         this.props.showNotification(`Added ${data} selection`)
-        this.fetchSelections();
+        this.props.getAllSelections();
       })
   }
 
@@ -68,7 +66,7 @@ class UserPage extends React.Component {
       .then(data => data.json())
       .then(data => {
         this.props.showNotification(`Deleted ${data} selection`)
-        this.fetchSelections();
+        this.props.getAllSelections();
       })
   }
 
@@ -94,7 +92,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   clearAuthorization: () => dispatch(clearAuthorization()),
   showNotification: (msg) => dispatch(showNotification(msg)),
-  getSelections: (list) => dispatch(getSelections(list)),
   getAllSelections: () => dispatch(getAllSelections())
 })
 

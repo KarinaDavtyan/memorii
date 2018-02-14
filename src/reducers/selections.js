@@ -1,3 +1,5 @@
+import * as typeAction from '../actions'
+
 const defaultState = {
   list: [],
   current: ''
@@ -5,19 +7,21 @@ const defaultState = {
 
 const selections = (state = defaultState, action) => {
   switch (action.type) {
-  case 'GET_SELECTIONS':
+  case typeAction.GET_SELECTIONS_SUCCESS:
     return {
       ...state,
-      list: action.list
+      list: action.response
     }
-  case 'GET_CURRENT_SELECTION':
+  case typeAction.GET_CURRENT_SELECTION:
     return {
       ...state,
       current: action.title
     }
+
   default:
-    return state;
+    return state
+
   }
-};
+}
 
 export default selections;
