@@ -63,6 +63,32 @@ export const getWords = (selection) => ({
   }
 })
 
+export const POST_WORDS_REQUEST = 'POST_WORDS_REQUEST';
+export const POST_WORDS_SUCCESS = 'POST_WORDS_SUCCESS';
+export const POST_WORDS_FAILURE = 'POST_WORDS_FAILURE';
+
+export const postWords = (data) => ({
+  [CALL_API] : {
+    types: [POST_WORDS_REQUEST, POST_WORDS_SUCCESS, POST_WORDS_FAILURE],
+    endpoint: '/words',
+    method: 'POST',
+    body: data
+  }
+})
+
+export const DELETE_WORDS_REQUEST = 'DELETE_WORDS_REQUEST';
+export const DELETE_WORDS_SUCCESS = 'DELETE_WORDS_SUCCESS';
+export const DELETE_WORDS_FAILURE = 'DELETE_WORDS_FAILURE';
+
+export const deleteWords = (data) => ({
+  [CALL_API] : {
+    types: [DELETE_WORDS_REQUEST, DELETE_WORDS_SUCCESS, POST_WORDS_FAILURE],
+    endpoint: '/words',
+    method: 'DELETE',
+    body: data
+  }
+})
+
 export const showNotification = (msg) => ({
   type: 'SHOW_NOTIFICATION',
   msg
