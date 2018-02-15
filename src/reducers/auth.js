@@ -15,7 +15,7 @@ const auth = (state = defaultState, action) => {
   case 'CREATE_USER_SUCCESS':
     return {
       ...state,
-      readyToLogin: !this.state.readyToLogin
+      readyToLogin: true
     }
   default:
     return state;

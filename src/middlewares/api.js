@@ -58,7 +58,8 @@ export default (store) => (next) => (action) => {
       next(actionWith({
         type: failureType,
         msg: error.statusText,
-        error: error.status
+        error: error.status,
+        fullError: error
       }))
     })
 

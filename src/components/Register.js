@@ -39,9 +39,6 @@ class Register extends React.Component {
 
   handleSubmit = () => {
     let { username, password } = this.state;
-    // username ?
-    //   username.length > 3 && username.match(/\W/ === null)
-
     this.props.createUser({
       username,
       password
@@ -168,12 +165,14 @@ class Register extends React.Component {
             name='username'
             value={this.state.username}
             onBlur={this.validateUsername}
+            disabled={this.state.approvedUsername} //change for sth more user friendly (it breakes if after validating when register button is availbale user decides to change something invalid)
           />
           <TextField
             floatingLabelText='Password'
             onChange={this.handleChanges}
             name='password'
             value={this.state.password}
+            disabled={this.state.approvedPassword}  //change for sth more user friendly
             type='password'
           />
         </div>
