@@ -17,6 +17,20 @@ class Register extends React.Component {
     disabled: true
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.approvedPassword !== this.state.approvedPassword) {
+      if (this.state.approvedUsername && this.state.approvedPassword) {
+        this.setState({
+          disabled: false
+        })
+      } else {
+        this.setState({
+          disabled: true
+        })
+      }
+    }
+  }
+
   handleChanges = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -87,6 +101,54 @@ class Register extends React.Component {
       : this.inValidateUsername('Please enter username')
   }
 
+  inValidatePassword = (msg) => {
+    this.setState({
+      approvedPassword: false
+    })
+    this.props.showNotification(msg)
+  }
+
+  validatePassword = () => {
+    let { password } = this.state;
+    let condition = {
+      length: {
+        rule: password.length > 8,
+        msg: 'be longer than 8 characters'
+      },
+      oneLetter: {
+        rule: password.match(/[A-Z]+/) !== null,
+        msg: 'contain at least 1 uppercase letter'
+      },
+      characters: {
+        rule: password.match(/\W/) === null,
+        msg: 'contain only letters, numbers or underscore'
+      }
+    }
+
+    password ?
+      !condition.length.rule && !condition.characters.rule && !condition.oneLetter.rule ?
+        this.inValidatePassword(`locPassword should ${condition.length.msg}, ${condition.oneLetter.msg} and ${condition.characters.msg}`)
+        : !condition.length.rule && !condition.characters.rule ?
+          this.inValidatePassword(
+            `lcPassword should ${condition.length.msg} and ${condition.characters.msg}`)
+          : !condition.length.rule && !condition.oneLetter.rule ?
+            this.inValidatePassword(
+              `loPassword should ${condition.length.msg} and ${condition.oneLetter.msg}`)
+            : !condition.characters.rule && !condition.oneLetter.rule ?
+              this.inValidatePassword(
+                `coPassword should ${condition.characters.msg} and ${condition.oneLetter.msg}`)
+              : condition.length.rule ?
+                condition.characters.rule ?
+                  condition.oneLetter.rule ?
+                    this.setState({
+                      approvedPassword: true
+                    })
+                    : this.inValidatePassword(`Password should ${condition.oneLetter.msg}`)
+                  : this.inValidatePassword(`Password should ${condition.characters.msg}`)
+                : this.inValidatePassword(`Password should ${condition.length.msg}`)
+      : this.inValidatePassword('Please enter password')
+  }
+
   redirect = () => {
     if (this.props.readyToLogin) {
       return (
@@ -116,7 +178,15 @@ class Register extends React.Component {
           />
         </div>
         <div className='buttons'>
-          <div className="leftButton">
+          <div className='leftButton'>
+            <RaisedButton
+              label='Check password security'
+              labelColor={pinkA400}
+              onClick={this.validatePassword}
+              disabled={this.state.password.length === 0 ? true : false}
+            />
+          </div>
+          <div className='leftButton'>
             <RaisedButton
               label='Register'
               labelColor={pinkA400}
