@@ -1,6 +1,7 @@
 const defaultState = {
   token: null,
   user: null,
+  readyToLogin: false
 }
 
 const auth = (state = defaultState, action) => {
@@ -10,6 +11,11 @@ const auth = (state = defaultState, action) => {
     return {
       token: action.response.token,
       user: action.response.user.username
+    }
+  case 'CREATE_USER_SUCCESS':
+    return {
+      ...state,
+      readyToLogin: !this.state.readyToLogin
     }
   default:
     return state;
