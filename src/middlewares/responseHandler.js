@@ -5,14 +5,14 @@ export default (store) => (next) => (action) => {
     })
   }
 
-  if (action.error && action.error === 400) {
+  if (action.type === 'CREATE_USER_FAILURE' && action.error && action.error === 400) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',
       msg: 'Sorry username already taken'
     })
   }
 
-  if (action.error && action.error === 404) {
+  if (action.type !== 'GET_USER_SESSION_FAILURE' && action.error && action.error === 404) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',
       msg: 'No content yet'
