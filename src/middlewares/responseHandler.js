@@ -5,6 +5,13 @@ export default (store) => (next) => (action) => {
     })
   }
 
+  if (action.error && action.error === 400) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'Sorry username already taken'
+    })
+  }
+
   if (action.error && action.error === 404) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',

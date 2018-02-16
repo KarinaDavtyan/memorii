@@ -45,7 +45,10 @@ class Register extends React.Component {
     })
     this.setState({
       username: '',
-      password: ''
+      password: '',
+      approvedUsername: false,
+      approvedPassword: false,
+      disabled: true
     })
   }
 
