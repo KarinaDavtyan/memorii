@@ -18,20 +18,28 @@ class Register extends React.Component {
     password: '',
     approvedUsername: false,
     approvedPassword: false,
-    disabled: true
   }
 
   componentDidUpdate (prevProps, prevState) {
     if (prevState.approvedPassword !== this.state.approvedPassword) {
       if (this.state.approvedUsername && this.state.approvedPassword) {
-        this.setState({
-          disabled: false
+        let { username, password } = this.state;
+        this.props.createUser({
+          username,
+          password
         })
-      } else {
         this.setState({
-          disabled: true
+          username: '',
+          password: '',
+          approvedUsername: false,
+          approvedPassword: false
         })
       }
+    }
+    if (prevProps.usernameTaken !== this.props.usernameTaken) {
+      this.setState({
+        username: ''
+      })
     }
   }
 
@@ -42,18 +50,8 @@ class Register extends React.Component {
   }
 
   handleSubmit = () => {
-    let { username, password } = this.state;
-    this.props.createUser({
-      username,
-      password
-    })
-    this.setState({
-      username: '',
-      password: '',
-      approvedUsername: false,
-      approvedPassword: false,
-      disabled: true
-    })
+    this.validateUsername();
+    this.validatePassword();
   }
 
 
@@ -86,13 +84,13 @@ class Register extends React.Component {
         this.inValidateUsername(`locUsername should ${condition.length.msg}, ${condition.oneLetter.msg} and ${condition.characters.msg}`)
         : !condition.length.rule && !condition.characters.rule ?
           this.inValidateUsername(
-            `lcUsername should ${condition.length.msg} and ${condition.characters.msg}`)
+            `Username should ${condition.length.msg} and ${condition.characters.msg}`)
           : !condition.length.rule && !condition.oneLetter.rule ?
             this.inValidateUsername(
-              `loUsername should ${condition.length.msg} and ${condition.oneLetter.msg}`)
+              `Username should ${condition.length.msg} and ${condition.oneLetter.msg}`)
             : !condition.characters.rule && !condition.oneLetter.rule ?
               this.inValidateUsername(
-                `coUsername should ${condition.characters.msg} and ${condition.oneLetter.msg}`)
+                `Username should ${condition.characters.msg} and ${condition.oneLetter.msg}`)
               : condition.length.rule ?
                 condition.characters.rule ?
                   condition.oneLetter.rule ?
@@ -107,7 +105,8 @@ class Register extends React.Component {
 
   inValidatePassword = (msg) => {
     this.setState({
-      approvedPassword: false
+      approvedPassword: false,
+      password: ''
     })
     this.props.showNotification(msg)
   }
@@ -134,13 +133,13 @@ class Register extends React.Component {
         this.inValidatePassword(`locPassword should ${condition.length.msg}, ${condition.oneLetter.msg} and ${condition.characters.msg}`)
         : !condition.length.rule && !condition.characters.rule ?
           this.inValidatePassword(
-            `lcPassword should ${condition.length.msg} and ${condition.characters.msg}`)
+            `Password should ${condition.length.msg} and ${condition.characters.msg}`)
           : !condition.length.rule && !condition.oneLetter.rule ?
             this.inValidatePassword(
-              `loPassword should ${condition.length.msg} and ${condition.oneLetter.msg}`)
+              `Password should ${condition.length.msg} and ${condition.oneLetter.msg}`)
             : !condition.characters.rule && !condition.oneLetter.rule ?
               this.inValidatePassword(
-                `coPassword should ${condition.characters.msg} and ${condition.oneLetter.msg}`)
+                `Password should ${condition.characters.msg} and ${condition.oneLetter.msg}`)
               : condition.length.rule ?
                 condition.characters.rule ?
                   condition.oneLetter.rule ?
@@ -171,33 +170,22 @@ class Register extends React.Component {
             onChange={this.handleChanges}
             name='username'
             value={this.state.username}
-            onBlur={this.validateUsername}
-            disabled={this.state.approvedUsername} //change for sth more user friendly (it breakes if after validating when register button is availbale user decides to change something invalid)
+            onBlur={() => this.props.checkUsername(this.state.username)}
           />
           <TextField
             floatingLabelText='Password'
             onChange={this.handleChanges}
             name='password'
             value={this.state.password}
-            disabled={this.state.approvedPassword}  //change for sth more user friendly
             type='password'
           />
         </div>
         <div className='buttons'>
           <div className='leftButton'>
             <RaisedButton
-              label='Check password security'
-              labelColor={pinkA400}
-              onClick={this.validatePassword}
-              disabled={this.state.password.length === 0 ? true : false}
-            />
-          </div>
-          <div className='leftButton'>
-            <RaisedButton
               label='Register'
               labelColor={pinkA400}
               onClick={this.handleSubmit}
-              disabled={this.state.disabled}
             />
           </div>
           <div className='rightButton'>

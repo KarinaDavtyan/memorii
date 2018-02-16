@@ -1,7 +1,8 @@
 const defaultState = {
   token: null,
   user: null,
-  readyToLogin: false
+  readyToLogin: false,
+  usernameTaken: false
 }
 
 const auth = (state = defaultState, action) => {
