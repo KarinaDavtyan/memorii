@@ -5,13 +5,21 @@ import { pinkA400 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect }  from 'react-router-dom';
 
-import { getUserSession } from '../actions';
+import { getUserSession, showNotification } from '../actions';
 
 class LogInForm extends React.Component {
 
   state = {
     username: '',
-    password: ''
+    password: '',
+    validated: false
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.validated !== this.state.validated) {
+      let { username, password } = this.state;
+      this.props.getUserSession(username, password);
+    }
   }
 
   redirect = () => {
@@ -22,10 +30,26 @@ class LogInForm extends React.Component {
     }
   }
 
-  handleSubmit = () => {
+  validateString = () => {
     let { username, password } = this.state;
-    this.props.getUserSession(username, password)
+    let condition = {
+      characters: {
+        rule: username.match(/\W/) === null && password.match(/\W/) === null,
+        msg: 'contain only letters, numbers or underscore'
+      }
+    }
+
+    username ?
+      !password ?
+        this.props.showNotification('Please enter password')
+        : condition.characters.rule ?
+          this.setState({
+            validated: true
+          })
+          : this.props.showNotification(`Input should ${condition.characters.msg}`)
+      : this.props.showNotification('Please enter username')
   }
+
 
   handleChanges = (e) => {
     this.setState({
@@ -57,7 +81,7 @@ class LogInForm extends React.Component {
             <RaisedButton
               label='Log In'
               labelColor={pinkA400}
-              onClick={this.handleSubmit}
+              onClick={() => this.validateString()}
             />
           </div>
           <div className='rightButton'>
@@ -79,4 +103,5 @@ const mapStateToProps = (state) => ({
   username: state.auth.user
 })
 
-export default connect(mapStateToProps, { getUserSession })(LogInForm);
+export default connect(mapStateToProps, {
+  getUserSession, showNotification })(LogInForm);

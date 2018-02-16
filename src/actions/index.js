@@ -13,6 +13,19 @@ export const createUser = (data) => ({
   }
 })
 
+export const CHECK_USERNAME_REQUEST = 'CHECK_USERNAME_REQUEST';
+export const CHECK_USERNAME_SUCCESS = 'CHECK_USERNAME_SUCCESS';
+export const CHECK_USERNAME_FAILURE = 'CHECK_USERNAME_FAILURE';
+
+export const checkUsername = (username) => ({
+  [CALL_API] : {
+    types: [CHECK_USERNAME_REQUEST, CHECK_USERNAME_SUCCESS, CHECK_USERNAME_FAILURE],
+    endpoint: '/check',
+    path: `/${username}`
+  }
+})
+
+
 export const GET_USER_SESSION_REQUEST = 'GET_USER_SESSION_REQUEST';
 export const GET_USER_SESSION_SUCCESS = 'GET_USER_SESSION_SUCCESS';
 export const GET_USER_SESSION_FAILURE = 'GET_USER_SESSION_FAILURE';
