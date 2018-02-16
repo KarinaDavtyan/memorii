@@ -5,7 +5,11 @@ import { pinkA400 } from 'material-ui/styles/colors';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { createUser, showNotification } from '../actions';
+import {
+  createUser,
+  checkUsername,
+  showNotification
+} from '../actions';
 
 class Register extends React.Component {
 
@@ -211,9 +215,10 @@ class Register extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  readyToLogin: state.auth.readyToLogin
+  readyToLogin: state.auth.readyToLogin,
+  usernameTaken: state.auth.usernameTaken
 })
 
 export default connect(mapStateToProps, {
-  createUser, showNotification
+  createUser, showNotification, checkUsername
 })(Register);

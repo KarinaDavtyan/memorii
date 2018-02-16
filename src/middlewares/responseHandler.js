@@ -5,7 +5,7 @@ export default (store) => (next) => (action) => {
     })
   }
 
-  if (action.type === 'CREATE_USER_FAILURE' && action.error && action.error === 400) {
+  if (action.type === 'CHECK_USERNAME_SUCCESS') {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',
       msg: 'Sorry username already taken'

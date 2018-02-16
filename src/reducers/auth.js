@@ -17,6 +17,11 @@ const auth = (state = defaultState, action) => {
       ...state,
       readyToLogin: true
     }
+  case 'CHECK_USERNAME_SUCCESS':
+    return {
+      ...state,
+      usernameTaken: !state.usernameTaken
+    }
   default:
     return state;
   }
