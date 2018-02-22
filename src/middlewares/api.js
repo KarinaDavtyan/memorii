@@ -1,7 +1,11 @@
 import { checkStatus } from '../helpers';
 
-const API_ROOT = 'http://localhost:3000';
-
+let API_ROOT ;
+if (process.env.SERVER) {
+  API_ROOT = process.env.SERVER;
+} else {
+  API_ROOT = 'http://localhost:3000'
+}
 const callApi = (endpoint, token, body, method = 'GET', path, encoded) => {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
   if (path) fullUrl =  fullUrl + encodeURI(path);
