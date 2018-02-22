@@ -6,7 +6,7 @@ let API_ROOT = process.env.SERVER;
 // } else {
 //   API_ROOT = 'http://localhost:3000'
 // }
-const callApi = (endpoint, token, body, method = 'GET', path, encoded) => {
+const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
   if (path) fullUrl =  fullUrl + encodeURI(path);
   const headers = {};
@@ -51,7 +51,7 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(endpoint, token, body, method, path, encoded)
+  return callApi(endpoint, body, token, method, path, encoded)
     .then(response => {
       next(actionWith({
         response,
