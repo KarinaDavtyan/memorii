@@ -10,6 +10,7 @@ const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
   if (token) headers.Authorization = `Bearer ${token}`;
   if (encoded) headers.Authorization = `Basic ${encoded}`
   headers['Content-Type'] = 'application/json';
+  headers['Access-Control-Allow-Origin'] = '*';
   return fetch(fullUrl, {
     method,
     headers,
