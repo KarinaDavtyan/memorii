@@ -1,13 +1,11 @@
 import { checkStatus } from '../helpers';
 
-// let API_ROOT ;
-// if (process.env.SERVER) {
-let API_ROOT = process.env.SERVER;
-// } else {
-//   API_ROOT = 'http://localhost:3000'
-// }
+let API_ROOT ;
+API_ROOT = process.env.SERVER || 'http://localhost:3000';
+
 const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
-  let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+  console.log(endpoint, 'endpoint', body, 'body', token, 'token', method, 'method', path, 'path', encoded, 'encoded');
+  let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   if (path) fullUrl =  fullUrl + encodeURI(path);
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
