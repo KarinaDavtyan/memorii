@@ -1,7 +1,7 @@
 import { checkStatus } from '../helpers';
 
 let API_ROOT ;
-API_ROOT = 'https://memorii-server.herokuapp.com/';
+API_ROOT = 'https://memorii-server.herokuapp.com';
 
 const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
