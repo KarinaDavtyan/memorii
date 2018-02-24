@@ -1,7 +1,7 @@
 import { checkStatus } from '../helpers';
 
 let API_ROOT ;
-API_ROOT = process.env.SERVER || 'http://localhost:3000';
+API_ROOT = process.env.REACT_APP_SERVER || 'http://localhost:3000';
 
 console.log(process.env.SERVER);
 
