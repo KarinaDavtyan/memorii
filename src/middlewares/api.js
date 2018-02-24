@@ -1,7 +1,9 @@
 import { checkStatus } from '../helpers';
 
 let API_ROOT ;
-API_ROOT = 'https://memorii-server.herokuapp.com';
+API_ROOT = process.env.SERVER || 'http://localhost:3000';
+
+console.log(process.env.SERVER);
 
 const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
@@ -13,8 +15,7 @@ const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
   return fetch(fullUrl, {
     method,
     headers,
-    body,
-
+    body
   })
     .then(checkStatus)
     .then(response => response.json())
