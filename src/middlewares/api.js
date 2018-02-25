@@ -1,9 +1,12 @@
 import { checkStatus } from '../helpers';
 
-const API_ROOT = 'http://localhost:3000';
+let API_ROOT ;
+API_ROOT = process.env.REACT_APP_SERVER || 'http://localhost:3000';
 
-const callApi = (endpoint, token, body, method = 'GET', path, encoded) => {
-  let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+console.log(process.env.SERVER);
+
+const callApi = (endpoint, body, token, method = 'GET', path, encoded) => {
+  let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   if (path) fullUrl =  fullUrl + encodeURI(path);
   const headers = {};
   if (token) headers.Authorization = `Bearer ${token}`;
@@ -47,7 +50,7 @@ export default (store) => (next) => (action) => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(endpoint, token, body, method, path, encoded)
+  return callApi(endpoint, body, token, method, path, encoded)
     .then(response => {
       next(actionWith({
         response,
