@@ -5,14 +5,15 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
 import Submit from './containers/Submit';
-import LogIn from './containers/LogIn';
 import Register from './components/Register';
-import UserPath from './containers/UserPath';
+import UserPath from './components/UserPath';
+import UserPage from './containers/UserPage';
 import LogInForm from './containers/LogInForm';
+import AppBar from './containers/AppBar';
+import ChatDesktop from './containers/ChatDesktop';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   return (
@@ -30,18 +31,43 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
   )
 }
 
+const EntryRoute = ({component: Component, auth, username, ...rest}) => {
+  return (
+    <Route
+      {...rest} render={props => (
+        auth === null ? (
+          <Component  {...props} {...rest}/>
+        ) : (
+          <Redirect to={{
+            pathname: `${username}`,
+            state: { from: props.location }
+          }}/>
+        )
+      )}/>
+  )
+}
+
+
 class Routes extends React.Component {
   render () {
     return (
       <Router>
-        <div>
-          <Switch>
-            <Route exact path="/" component={LogIn}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/welcome" component={UserPath}/>
-            <Route path="/login" component={LogInForm}/>
-            <PrivateRoute path="/:username" auth={this.props.auth} component={Submit}/>
-          </Switch>
+        <div className="Container">
+          <AppBar />
+          <div className='App'>
+            <Switch>
+              <EntryRoute exact path="/"
+                username={this.props.username}
+                auth={this.props.auth}
+                component={UserPath}
+              />
+              <Route path="/register" component={Register}/>
+              <Route path="/login" component={LogInForm}/>
+              <PrivateRoute path="/chat" auth={this.props.auth} component={ChatDesktop}/>
+              <PrivateRoute path="/:username/:selection" auth={this.props.auth} component={Submit}/>
+              <PrivateRoute path="/:username" auth={this.props.auth} component={UserPage}/>
+            </Switch>
+          </div>
         </div>
       </Router>
     )
@@ -50,7 +76,8 @@ class Routes extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  auth: state.token
+  auth: state.auth.token,
+  username: state.auth.user
 })
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, null)(Routes);

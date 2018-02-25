@@ -1,25 +1,22 @@
-const defaultAuthState = {
-  token: null,
-  user: null,
-}
+import { combineReducers } from 'redux';
 
-const auth = (state = defaultAuthState, action) => {
-  switch (action.type) {
-  case 'SET_AUTHORIZATION':
-    return {
-      token: action.data.token,
-      user: action.data.username
-    }
-    break;
-  case 'CLEAR_AUTHORIZATION':
-    return {
-      token: null,
-      user: null
-    }
-    break;
+import auth from './auth';
+import notification from './notification';
+import selections from './selections';
+import words from './words';
+
+const appReducers = combineReducers({
+  auth,
+  notification,
+  selections,
+  words
+})
+
+const rootReducer = (state, action) => {
+  if (action.type === 'CLEAR_AUTHORIZATION') {
+    state = undefined
   }
-
-  return state;
+  return appReducers(state, action)
 }
 
-export default auth;
+export default rootReducer;

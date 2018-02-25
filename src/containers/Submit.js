@@ -4,34 +4,43 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pinkA400} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 import { Link }  from 'react-router-dom';
+import {
+  getWords,
+  postWords,
+  deleteWords
+} from '../actions';
+
+import WordsList from '../components/WordsList';
 
 class Submit extends React.Component {
 
   state = {
     firstWord: '',
-    secondWord: ''
+    secondWord: '',
+    selection: this.props.selection,
+    words: ''
   }
 
-  saveWords = (data) => {
-    fetch('http://Karina-MacBookPro.local:3000/pair', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.auth}`
-      },
-      body: JSON.stringify(data)
-    })
+  componentDidMount () {
+    this.props.getWords(this.props.selection)
   }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.words !== this.props.words) {
+      this.setState({
+        words: this.props.words
+      })
+    }
+  }
+
   handleSubmit = () => {
-    const { username } = this.props;
-    const { firstWord, secondWord } = this.state;
+    const { firstWord, secondWord, selection } = this.state;
 
-    this.saveWords({
+    this.props.postWords({
       firstWord,
       secondWord,
-      username
+      selection
     })
-
     this.setState({
       firstWord: '',
       secondWord: ''
@@ -47,70 +56,69 @@ class Submit extends React.Component {
   render () {
     return (
       <div className='Submit'>
+        <div className='backToSelections'>
+          <Link to={`/${this.props.username}`}>
+            <RaisedButton
+              label='Back to selections'
+              labelColor={pinkA400}
+            />
+          </Link>
+        </div>
         <div>
           <p>
             Insert pair of words you want to learn.
           </p>
         </div>
-        <div className='inputs'>
-          <div className='firstInput'>
-            <TextField
-              floatingLabelText='One'
-              onChange={this.handleChanges}
-              name='firstWord'
-              value={this.state.firstWord}
-            />
-          </div>
-          <div className='secondInput'>
-            <TextField
-              floatingLabelText='Two'
-              onChange={this.handleChanges}
-              name='secondWord'
-              value={this.state.secondWord}
-            />
-          </div>
-        </div>
-        <div className='buttons'>
-          <div className='leftButton'>
-            <RaisedButton
-              label='Send'
-              labelColor={pinkA400}
-              onClick={this.handleSubmit}
-            />
-          </div>
-          <div className='rightButton'>
-            <Link to={'/login'}>
-              <RaisedButton
-                label='LogOut'
-                labelColor={pinkA400}
-                onClick={this.props.clearAuthorization}
+        <div className='SendElements'>
+          <div className='inputs'>
+            <div className='firstInput'>
+              <TextField
+                floatingLabelText='One'
+                onChange={this.handleChanges}
+                name='firstWord'
+                value={this.state.firstWord}
               />
-            </Link>
+            </div>
+            <div className='secondInput'>
+              <TextField
+                floatingLabelText='Two'
+                onChange={this.handleChanges}
+                name='secondWord'
+                value={this.state.secondWord}
+              />
+            </div>
+          </div>
+          <div className='buttons'>
+            <div className='sendButton'>
+              <RaisedButton
+                label='Send'
+                labelColor={pinkA400}
+                onClick={this.handleSubmit}
+              />
+            </div>
           </div>
         </div>
+        <WordsList
+          words={this.state.words}
+          selection={this.state.selection}
+          onDelete={(data) => this.props.deleteWords(data)}
+        />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.token,
-    username: state.user
-  };
-}
-
-// const mapDispatchToProps = (dispatch) = ({
-//   clearAuthorization: () => dispatch({
-//     type: 'CLEAR_AUTHORIZATION'
-//   })
-// })
-
-const mapDispatchToProps = (dispatch) => ({
-  clearAuthorization: () => dispatch({
-    type: 'CLEAR_AUTHORIZATION'
-  })
+const mapStateToProps = (state) => ({
+  auth: state.auth.token,
+  username: state.auth.user,
+  selection: state.selections.current,
+  words: state.words.list
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  getWords: (path) => dispatch(getWords(path)),
+  postWords: (data) => dispatch(postWords(data)),
+  deleteWords: (data) => dispatch(deleteWords(data))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Submit);
