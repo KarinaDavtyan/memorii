@@ -11,6 +11,11 @@ const words = (state = defaultState, action) => {
       ...state,
       list: action.response
     }
+  case typeAction.GET_WORDS_FAILURE:
+    return {
+      ...state,
+      list: []
+    }
   case typeAction.POST_WORDS_SUCCESS:
     return {
       ...state,
