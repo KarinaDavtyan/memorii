@@ -12,16 +12,7 @@ class AppBar extends React.Component {
     chat: false
   }
 
-  chatOption = () => {
-    return (
-      <Link to='/chat'>
-        <h3>
-          memorii_chat
-        </h3>
-      </Link>
-    )
-  }
-  renderLinks = () => {
+  renderTelegramLink = () => {
     return (
       <div className='Links'>
         <a href='https://web.telegram.org/#/im?p=@memorii_bot'>
@@ -29,10 +20,6 @@ class AppBar extends React.Component {
             @memorii_bot
           </h3>
         </a>
-        <h3>
-          /
-        </h3>
-        {this.chatOption()}
       </div>
     )
   }
@@ -71,7 +58,7 @@ class AppBar extends React.Component {
       <div className="AppBar">
         <Bar
           style={style.main}
-          iconElementLeft={this.renderLinks()}
+          iconElementLeft={this.renderTelegramLink()}
           iconElementRight={this.renderLogButton()}
           iconStyleLeft={style.left}
           iconStyleRight={style.right}
