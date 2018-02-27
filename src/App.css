@@ -157,9 +157,13 @@ a:hover {
 .PlaceHolder {
   text-align: center;
   display: flex;
-  flex-direction: column;
 }
 
+.AddSelection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .PaperContainer {
   display: flex;
   align-items: center;

@@ -75,55 +75,45 @@ class Selection extends React.Component {
           )
         })
       return selections;
+    } else {
+      return null
+    }
+  }
+
+  renderSelectionContainer = () => {
+    if (this.props.selections && this.props.selections.length > 0) {
+      return (
+        <div className="SelectionContainer">
+          {this.renderSelection()}
+        </div>
+      )
     }
   }
 
   render () {
-    if (this.props.selections.length > 0) {
-      return (
-        <div className="SelectionList">
-          <div className="SelectionContainer">
-            {this.renderSelection()}
+    return (
+      <div className="SelectionList">
+        {this.renderSelectionContainer()}
+        <div className='AddSelection'>
+          <div className='TitleInput'>
+            <TextField
+              floatingLabelText='Type selection title'
+              onChange={this.handleChanges}
+              name='title'
+              value={this.state.title}
+              onKeyPress={(e) => e.key === 'Enter' ? this.handleSubmit() : null}
+            />
           </div>
-          <div className='InputButtonSelection'>
-            <div className='addSelectionInput'>
-              <TextField
-                floatingLabelText='New Selection'
-                onChange={this.handleChanges}
-                name='title'
-                value={this.state.title}
-              />
-            </div>
-            <div className='addSelectionButton'>
-              <RaisedButton
-                label='Add Selection'
-                labelColor={pinkA400}
-                onClick={this.handleSubmit}
-              />
-            </div>
+          <div className='TitleSaveButton'>
+            <RaisedButton
+              label='Save'
+              labelColor={pinkA400}
+              onClick={this.handleSubmit}
+            />
           </div>
         </div>
-      )
-    } else {
-      return (
-        <div className='PlaceHolder'>
-          <p>
-            Oops, nothing here yet:(
-          </p>
-          <TextField
-            floatingLabelText='New Selection'
-            onChange={this.handleChanges}
-            name='title'
-            value={this.state.title}
-          />
-          <RaisedButton
-            label='Add Selection'
-            labelColor={pinkA400}
-            onClick={this.handleSubmit}
-          />
-        </div>
-      )
-    }
+      </div>
+    )
   }
 }
 
