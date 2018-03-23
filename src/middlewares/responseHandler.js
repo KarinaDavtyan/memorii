@@ -19,6 +19,15 @@ export default (store) => (next) => (action) => {
     })
   }
 
+  if (action.type === 'GET_USER_SESSION_FAILURE'
+        && action.error
+        && (action.error === 400 || action.error === 404)) {
+    store.dispatch({
+      type: 'SHOW_NOTIFICATION',
+      msg: 'Invalid Credentials'
+    })
+  }
+
   if (action.type.match(/CREATE\S+SUCCESS/) !== null) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',

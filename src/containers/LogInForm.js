@@ -16,9 +16,18 @@ class LogInForm extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.validated !== this.state.validated) {
+    if (prevState.validated !== this.state.validated
+          && this.state.validated === true) {
       let { username, password } = this.state;
       this.props.getUserSession(username, password);
+    }
+    if (prevProps.notificationTime !== this.props.notificationTime
+          && this.props.notification === 'Invalid Credentials') {
+      this.setState({
+        username: '',
+        password: '',
+        validated: false
+      })
     }
   }
 
@@ -100,7 +109,9 @@ class LogInForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth.token,
-  username: state.auth.user
+  username: state.auth.user,
+  notification: state.notification.notificationMessage,
+  notificationTime: state.notification.notificationTime
 })
 
 export default connect(mapStateToProps, {
