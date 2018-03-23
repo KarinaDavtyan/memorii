@@ -59,16 +59,18 @@ class Submit extends React.Component {
         <div className='backToSelections'>
           <Link to={`/${this.props.username}`}>
             <RaisedButton
-              label='Back to selections'
+              label='Back to collections'
               labelColor={pinkA400}
             />
           </Link>
         </div>
+        <h3>{this.props.selection}</h3>
         <div>
           <p>
-            Insert pair of words you want to learn.
+            Insert pair of words you want to memorize.
           </p>
         </div>
+        <br/>
         <div className='SendElements'>
           <div className='inputs'>
             <div className='firstInput'>
@@ -91,12 +93,13 @@ class Submit extends React.Component {
           <div className='buttons'>
             <div className='sendButton'>
               <RaisedButton
-                label='Send'
+                label='Save'
                 labelColor={pinkA400}
                 onClick={this.handleSubmit}
               />
             </div>
           </div>
+          <br/>
         </div>
         <WordsList
           words={this.state.words}

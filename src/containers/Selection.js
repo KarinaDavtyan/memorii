@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -15,14 +14,16 @@ class Selection extends React.Component {
 
   state = {
     selection: '',
-    title: '',
+    title: 'VERBS-Spanish',
   }
 
   handleSubmit = () => {
     const { title } = this.state;
-    this.props.onSave({
-      title
-    });
+    if (this.state.title.length > 0) {
+      this.props.onSave({
+        title
+      });
+    }
     this.setState({
       title:''
     })
@@ -41,9 +42,6 @@ class Selection extends React.Component {
   }
 
   renderSelection = () => {
-    const style = {
-      margin: 20
-    };
     if (this.props.selections) {
       let selections = this.props.selections
         .sort(ReverseSort)
@@ -51,26 +49,24 @@ class Selection extends React.Component {
           let path = selection.title.replace(/\s/g, '');
           return (
             <div className='SelectionItem' key={selection._id}>
-              <Paper style={style} zDepth={2} >
-                <div className='PaperContainer'>
-                  <Link
-                    to={`/${this.props.username}/${path}`}
-                    onClick={() => this.props.saveSelectionTitle(selection.title)}
-                  >
-                    <div className='SelectionTitle' >
-                      <p>
-                        {selection.title}
-                      </p>
-                    </div>
-                  </Link>
-                  <div className='DeleteButton'>
-                    <FlatButton
-                      label='DELETE'
-                      onClick={() => this.handleDelete(selection.title)}
-                    />
+              <div className='PaperContainer'>
+                <Link
+                  to={`/${this.props.username}/${path}`}
+                  onClick={() => this.props.saveSelectionTitle(selection.title)}
+                >
+                  <div className='SelectionTitle' >
+                    <p>
+                      {selection.title}
+                    </p>
                   </div>
+                </Link>
+                <div className='DeleteButton'>
+                  <FlatButton
+                    label='DELETE'
+                    onClick={() => this.handleDelete(selection.title)}
+                  />
                 </div>
-              </Paper>
+              </div>
             </div>
           )
         })
@@ -83,7 +79,7 @@ class Selection extends React.Component {
   renderSelectionContainer = () => {
     if (this.props.selections && this.props.selections.length > 0) {
       return (
-        <div className="SelectionContainer">
+        <div>
           {this.renderSelection()}
         </div>
       )
@@ -92,12 +88,14 @@ class Selection extends React.Component {
 
   render () {
     return (
-      <div className="SelectionList">
-        {this.renderSelectionContainer()}
+      <div className='SelectionList'>
+        <div className='SelectionContainer'>
+          {this.renderSelectionContainer()}
+        </div>
         <div className='AddSelection'>
           <div className='TitleInput'>
             <TextField
-              floatingLabelText='Type selection title'
+              floatingLabelText='Collection title'
               onChange={this.handleChanges}
               name='title'
               value={this.state.title}
