@@ -1,17 +1,43 @@
 # Memorii frontend
 
-The easy tool to facilitate your day-to-day words memorising.
-+ Create your account
-+ Manage your words learning selections
-+ Add words you want to memorise
-+ Forward to [TelegramBot](https://telegram.me/remember_the_words_bot) to start your learning sprints.
+The easy tool to facilitate words memorising.
 
-![screenshot](https://s3-eu-west-1.amazonaws.com/extras-to-save/Screens/Screen+Shot+2018-01-22+at+14.24.27.png)
+Installation
+----
+
++ Follow installation steps of [memorii-backend](https://github.com/KarinaDavtyan/memorii-backend)
++ Run commands ⬇️
+
+`git clone https://github.com/KarinaDavtyan/memorii.git`
+`cd memorii`
+`yarn install`
+
+To find out more about bot itself, go the memorii-bot repo [here](https://github.com/KarinaDavtyan/memorii-bot)
+
+Usage
+----
++ Create your account
++ Add words you want to memorize into collections
+
 First word should be of the language you know and the second one is the one you want to remember
 
-To find out what does bot exactly do, go [here](https://github.com/KarinaDavtyan/memorii-bot)
-Or if you are interested to know about server side, [here](https://github.com/KarinaDavtyan/memorii-backend)
+![gif](src/media/memorii_gif.gif)
 
-Tech-stack:
++ Forward to [TelegramBot](https://telegram.me/memorii_bot) to start your learning sprints with @memorii_bot
+
+Tech-stack
+----
+
 + React + redux
-+ Material-Ui
++ Material-UI
+
+
+Contributing
+----
+
++ Fork the repo (https://github.com/KarinaDavtyan/memorii/fork)
++ Clone it
++ Create your feature branch
++ Commit changes to your own branch
++ Push to the branch
++ Create a new Pull Request
