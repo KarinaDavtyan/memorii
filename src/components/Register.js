@@ -170,7 +170,10 @@ class Register extends React.Component {
             onChange={this.handleChanges}
             name='username'
             value={this.state.username}
-            onBlur={() => this.props.checkUsername(this.state.username)}
+            onBlur={() => {
+              this.props.checkUsername(this.state.username);
+              this.validateUsername();
+            }}
           />
           <TextField
             floatingLabelText='Password'

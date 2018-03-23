@@ -12,7 +12,9 @@ export default (store) => (next) => (action) => {
     })
   }
 
-  if (action.type !== 'GET_USER_SESSION_FAILURE' && action.error && action.error === 404) {
+  if (action.type !== 'GET_USER_SESSION_FAILURE'
+        && action.type !== 'CHECK_USERNAME_FAILURE'
+        && action.error && action.error === 404) {
     store.dispatch({
       type: 'SHOW_NOTIFICATION',
       msg: 'No content yet'
