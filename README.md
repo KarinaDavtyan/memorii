@@ -1,15 +1,17 @@
-# Memorii frontend
+# Memorii
 
-The easy tool to facilitate words memorising.
+> Front-end for Telegram bot which helps with words memorizing.
 
 Installation
 ----
 
 + Follow installation steps of [memorii-backend](https://github.com/KarinaDavtyan/memorii-backend)
-+ Run commands ⬇️
++ Run commands :arrow_down:
 
 `git clone https://github.com/KarinaDavtyan/memorii.git`
+
 `cd memorii`
+
 `yarn install`
 
 To find out more about bot itself, go the memorii-bot repo [here](https://github.com/KarinaDavtyan/memorii-bot)
@@ -19,18 +21,17 @@ Usage
 + Create your account
 + Add words you want to memorize into collections
 
-First word should be of the language you know and the second one is the one you want to remember
-
 ![gif](src/media/memorii_gif.gif)
 
-+ Forward to [TelegramBot](https://telegram.me/memorii_bot) to start your learning sprints with @memorii_bot
++ Forward to [Telegram](https://telegram.me/memorii_bot) to start your learning sprints with @memorii_bot
+
+![bot_gif](src/media/memorii_gif.gif)
 
 Tech-stack
 ----
 
-+ React + redux
++ React + Redux
 + Material-UI
-
 
 Contributing
 ----
