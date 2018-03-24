@@ -25,7 +25,7 @@ Usage
 
 + Forward to [Telegram](https://telegram.me/memorii_bot) to start your learning sprints with @memorii_bot
 
-![bot_gif](src/media/memorii_gif.gif)
+![bot_gif](src/media/bot_gif.gif)
 
 Tech-stack
 ----
