@@ -15,6 +15,23 @@ class LogInForm extends React.Component {
     validated: false
   }
 
+  conponentDidMount () {
+    const script = document.createElement('script');
+    script.src = 'https://telegram.org/js/telegram-widget.js?4';
+    script.setAttribute('data-telegram-login', 'memorii_bot');
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-request-access', 'write');
+    script.setAttribute('data-onauth', 'this.onTelegramAuth(user)')
+    script.async = true;
+    this.instance.appendChild(script);
+  }
+
+
+  onTelegramAuth = (user) => {
+    console.log(user);
+    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+  }
+
   componentDidUpdate (prevProps, prevState) {
     if (prevState.validated !== this.state.validated
           && this.state.validated === true) {
@@ -104,6 +121,12 @@ class LogInForm extends React.Component {
                 labelColor={pinkA400}
               />
             </Link>
+          </div>
+          <div id='telegram'
+            ref={component => {
+              this.instance = component;
+            }}
+          >
           </div>
         </div>
       </div>
