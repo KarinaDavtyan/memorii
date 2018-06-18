@@ -19,6 +19,10 @@ class LogInForm extends React.Component {
     if (prevState.validated !== this.state.validated
           && this.state.validated === true) {
       let { username, password } = this.state;
+      //temporary to wake up bot on login
+      fetch(process.env.BOT, {
+        mode: 'no-cors'
+      })
       this.props.getUserSession(username, password);
     }
     if (prevProps.notificationTime !== this.props.notificationTime
